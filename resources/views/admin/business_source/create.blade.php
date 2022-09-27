@@ -1,0 +1,49 @@
+@extends('layouts.admin')
+
+@section('content')
+<div class="container-fluid">
+{{-- 
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif --}}
+
+<!-- Content Row -->
+        <div class="card shadow">
+            <div class="card-header py-3 d-flex">
+            <h1 class="h3 mb-0 text-gray-800">{{ __('Add Business Source') }}</h1>
+                <div class="ml-auto">
+                    <a href="{{ route('admin.business_source.index') }}" class="btn btn-primary">
+                        <span class="text">{{ __('Go Back') }}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('admin.business_source.store') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="source">{{ __('Source') }}</label>
+                        <input type="text" class="form-control" id="source" placeholder="" name="source" value="{{ old('source') }}" required/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="apply_commission">{{ __('Apply Commission') }}</label><br>
+                        <input type="radio" name="apply_commission" id="yes" value="yes" required/> Yes
+                        &nbsp;&nbsp;&nbsp;<input type="radio" name="apply_commission" id="no" value="no" required/> No
+                    </div>
+                 
+                    <button type="submit" class="btn btn-primary btn-block">{{ __('Save') }}</button> 
+                </form>
+            </div>
+        </div>
+    
+
+    <!-- Content Row -->
+
+</div>
+@endsection
