@@ -29,7 +29,6 @@ Route::group(['middleware' => ['isAdmin','auth'],'prefix' => 'admin', 'as' => 'a
  
     Route::resource('rooms', \App\Http\Controllers\Admin\RoomController::class);
     Route::get('room_position', [\App\Http\Controllers\Admin\RoomController::class, 'show'])->name('room_position.show');
-    Route::get('room_calendar', [\App\Http\Controllers\Admin\RoomController::class, 'show_calendar'])->name('room_calendar.show_calendar');
     Route::delete('rooms_mass_destroy', [\App\Http\Controllers\Admin\RoomController::class, 'massDestroy'])->name('rooms.mass_destroy');
     
     Route::resource('front_office_order', \App\Http\Controllers\Admin\FrontOfficeController::class);
@@ -48,15 +47,10 @@ Route::group(['middleware' => ['isAdmin','auth'],'prefix' => 'admin', 'as' => 'a
     Route::delete('business_source', [\App\Http\Controllers\Admin\BusinessSourceController::class, 'massDestroy'])->name('business_source.mass_destroy');
 
     Route::resource('reservation', \App\Http\Controllers\Admin\ReservationController::class);
-//    Route::resource('reservation/create',[ \App\Http\Controllers\Admin\ReservationController::class, 'edit'])->name('reservation.edit');
-    
-   // Route::any('reservation/index',[ \App\Http\Controllers\Admin\ReservationController::class, 'index'])->name('reservation.index');
-   //Route::resource('reservation/index',[ReservationController::class,'index']);
-   //Route::resource('reservation/create',[ \App\Http\Controllers\Admin\ReservationController::class, 'show'])->name('reservation.show');
-    //
-  //  Route::resource('reservation/create', \App\Http\Controllers\Admin\ReservationController::class);
-    
     Route::delete('reservation', [\App\Http\Controllers\Admin\ReservationController::class, 'massDestroy'])->name('reservation.mass_destroy');
+    
+    Route::resource('room_calendar', \App\Http\Controllers\Admin\RoomCalendarController::class);
+    //Route::get('/admin/room_calendar', [\App\Http\Controllers\Admin\RoomCalendarController::class, 'show'])->name('room_calendar.show');
     
     Route::get('system_calendars', [\App\Http\Controllers\Admin\SystemCalendarController::class, 'index'])->name('system_calendars.index');
 });

@@ -80,7 +80,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.room_calendar.show_calendar') }}" data-toggle="" data-target="#collapseRoom" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="{{ route('admin.room_calendar.index') }}" data-toggle="" data-target="#collapseRoom" aria-expanded="true" aria-controls="collapseTwo">
                     <span>{{ __('Room Calendar') }}</span>
                 </a>
             </li>

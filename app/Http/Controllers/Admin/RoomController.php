@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,12 +23,7 @@ class RoomController extends Controller
         $rooms = Room::all();
         return view('admin.room_position.view')->with('rooms',$rooms);
     }
-    public function show_calendar(){
-        $rooms = Room::all();
-        return view('admin.room_calendar.view')->with('rooms',$rooms);    
-    }
     
-
     public function create()
     {
         return view('admin.rooms.create');
@@ -85,5 +81,4 @@ class RoomController extends Controller
         Room::whereIn('id', request('ids'))->delete();
         return response()->noContent();
     }
-
 }

@@ -2,10 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-
     <!-- Page Heading -->
-   
-
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
@@ -15,7 +12,7 @@
             </div>
             <div class="card-body">
                 <ul class="list">
-                    <li class="list-items"><a href="#home">Jan</a></li>
+                    <li class="list-items"><a href="#">Jan</a></li>
                     <li class="list-items"><a href="#news">Feb</a></li>
                     <li class="list-items"><a href="#contact">Mar</a></li>
                     <li class="list-items"><a href="#contact">Apr</a></li>
@@ -27,139 +24,120 @@
                     <li class="list-items"><a href="#contact">Oct</a></li>
                     <li class="list-items"><a href="#contact">Nov</a></li>
                     <li class="list-items"><a href="#contact">Dec</a></li>
-                  </ul>
-                  
-                  <table border="1" cellpadding="5" cellspacing="0">
+                </ul>
+                <table border="1" cellpadding="5" cellspacing="0">
                     <thead>
                         <th>Room No.</th>
                         <th>Room Type</th>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                        <th>6</th>
-                        <th>7</th>
-                        <th>8</th>
-                        <th>9</th>
-                        <th>10</th>
-                        <th>11</th>
-                        <th>12</th>
-                        <th>13</th>
-                        <th>14</th>
-                        <th>15</th>
-                        <th>16</th>
-                        <th>17</th>
-                        <th>18</th>
-                        <th>19</th>
-                        <th>20</th>
-                        <th>21</th>
-                        <th>22</th>
-                        <th>23</th>
-                        <th>24</th>
-                        <th>25</th>
-                        <th>26</th>
-                        <th>27</th>
-                        <th>28</th>
-                        <th>29</th>
-                        <th>30</th>
-                        <th>31</th>
+                        @for($i=1; $i<=31; $i++)
+                            <th>{{$i}}</th>
+
+                        @endfor
                     </thead>
+                       
                     <tbody>
-                        
-                        @foreach($rooms as $key => $room)
-                        
-                            @if($room->room_type == "Single")
-                        <tr data-entry-id="{{ $room->id }}">
-                            <td>
-                                {{$room->room_number}}
-                            </td>
-                            <td>Single</td>
-                            
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>    
-                        @endif
+                        @foreach($rooms as $room)
+                            @if($room->room_type == "Single")   
+                                <tr data-entry-id="{{ $room->id }}">
+                                    <td>{{$room->room_number}}</td>
+                                    <td>{{$room->room_type}}</td>
+                                    @for($i=1; $i<=31; $i++)
+                                        @if($i == 23 || $i == 24 || $i == 25 || $i == 26 || $i == 27)
+                                            @for($j=$i; $j<=$i; $j++)
+                                                @if($room->room_status == "Occupied")
+                                                        <td class="occupied"></td>
+                                                    @elseif($room->room_status == "Vacant Dirty")
+                                                        <td class="dirty"></td>
+                                                    @elseif($room->room_status == "Vacant Clean")
+                                                        <td class="clean"></td>
+                                                    @elseif($room->room_status == "Reserved")
+                                                        <td class="reserved"></td>
+                                                    @elseif($room->room_status == "Out of Order")
+                                                        <td class="out"></td>
+                                                @endif
+                                            @endfor
+                                        @else
+                                            <td></td>
+                                        @endif
+                                    @endfor 
+                                </tr>    
+                                @endif
                         @endforeach
 
                         @foreach($rooms as $key => $room)
-                        
-                        @if($room->room_type == "Quad")
-                    <tr data-entry-id="{{ $room->id }}">
-                        <td>
-                            {{$room->room_number}}
-                        </td>
-                        <td>Quad</td>
-                        
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>    
-                    @endif
-                    @endforeach
+                            @if($room->room_type == "Double")
+                            <tr data-entry-id="{{ $room->id }}">
+                                <td>{{$room->room_number}}</td>
+                                <td>{{$room->room_type}}</td>
+                                @for($i=1; $i<=31; $i++)
+                                    <td></td>
+                                @endfor
+                            </tr>    
+                            @endif
+                        @endforeach
 
-            
-                      
+                        @foreach($rooms as $key => $room)
+                            @if($room->room_type == "Triple")
+                            <tr data-entry-id="{{ $room->id }}">
+                                <td>{{$room->room_number}}</td>
+                                <td>{{$room->room_type}}</td>
+                                @for($i=1; $i<=31; $i++)
+                                    <td></td>
+                                @endfor
+                            </tr>    
+                            @endif
+                        @endforeach
+
+                        @foreach($rooms as $room)
+                            @if($room->room_type == "Quad")
+                            <tr data-entry-id="{{ $room->id }}">
+                                <td>{{$room->room_number}}</td>
+                                <td>{{$room->room_type}}</td>
+                                @for($i=1; $i<=31; $i++)
+                                    <td></td>
+                                @endfor
+                            </tr>    
+                            @endif
+                        @endforeach
+
+                        @foreach($rooms as $key => $room)
+                            @if($room->room_type == "Twin")
+                            <tr data-entry-id="{{ $room->id }}">
+                                <td>{{$room->room_number}}</td>
+                                <td>{{$room->room_type}}</td>
+                                @for($i=1; $i<=31; $i++)
+                                    <td></td>
+                                @endfor
+                            </tr>    
+                            @endif
+                        @endforeach
+                
+                        @foreach($rooms as $key => $room)
+                            @if($room->room_type == "Cabana")
+                            <tr data-entry-id="{{ $room->id }}">
+                                <td>{{$room->room_number}}</td>
+                                <td>{{$room->room_type}}</td>
+                                @for($i=1; $i<=31; $i++)
+                                    <td></td>
+                                @endfor
+                            </tr>    
+                            @endif
+                        @endforeach
+
+                        @foreach($rooms as $key => $room)
+                            @if($room->room_type == "Connecting Rooms")
+                            <tr data-entry-id="{{ $room->id }}">
+                                <td>{{$room->room_number}}</td>
+                                <td>{{$room->room_type}}</td>
+                                @for($i=1; $i<=31; $i++)
+                                    <td></td>
+                                @endfor
+                            </tr>    
+                            @endif
+                        @endforeach
+
                     </tbody>
                   </table>
-                  
                   <br>
                   <h6 class="boxed occupied" >Occupied</h6>
                   <h6 class="boxed dirty">Vacant Dirty</h6>

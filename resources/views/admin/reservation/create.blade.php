@@ -96,6 +96,8 @@
                         <table class="table">
                             <thead>
                               <tr>
+                                
+                                <th scope="col">Room No.</th>
                                 <th scope="col">Room Type</th>
                                 {{-- <th scope="col">Total No.</th> --}}
                                  <th scope="col">Pax</th>{{--number of person allowed per package --}}
@@ -106,6 +108,7 @@
                             <tbody>
                                @foreach($reservations as $room)
                               <tr data-entry-id="{{ $room->id }}" class="txtMult">
+                                <td>{{ $room->room_number }}</td> 
                                 <td>{{ $room->room_type }}</td> 
                                 {{-- <td>
                                     <div class="col-md-4">    
@@ -118,6 +121,7 @@
                               </tr>
                               @endforeach
                               <tr>
+                                <td></td>
                                 <td></td>
                                 <th scope="row" colspan="2">Total Pax <input type="number" class="form-control col-md-2" id="totalpax" name="totalpax" readonly/>                  
                                 </th>
