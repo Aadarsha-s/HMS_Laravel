@@ -50,7 +50,7 @@ Route::group(['middleware' => ['isAdmin','auth'],'prefix' => 'admin', 'as' => 'a
     Route::delete('reservation', [\App\Http\Controllers\Admin\ReservationController::class, 'massDestroy'])->name('reservation.mass_destroy');
     
     Route::resource('room_calendar', \App\Http\Controllers\Admin\RoomCalendarController::class);
-    //Route::get('/admin/room_calendar', [\App\Http\Controllers\Admin\RoomCalendarController::class, 'show'])->name('room_calendar.show');
+    //Route::resource('room_calendar/show/{key}', [\App\Http\Controllers\Admin\RoomCalendarController::class, 'show'])->name('room_calendar.show');
     
     Route::get('system_calendars', [\App\Http\Controllers\Admin\SystemCalendarController::class, 'index'])->name('system_calendars.index');
 });

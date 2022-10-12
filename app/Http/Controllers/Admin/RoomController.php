@@ -50,6 +50,7 @@ class RoomController extends Controller
         return view('admin.rooms.edit', compact('rooms'));
     }
 
+    
     public function update(Request $request,$id)
     {
         $rooms = Room::find($id);

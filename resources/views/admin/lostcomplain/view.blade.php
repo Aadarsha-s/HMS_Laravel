@@ -33,7 +33,7 @@
                                 <th>Room No</th>
                                 <th>Date</th>
                                 <th>Description</th>
-                                <th>Complain Received By</th>
+                                <th>Received By</th>
                                 <th>Action</th>
 
                             </tr>

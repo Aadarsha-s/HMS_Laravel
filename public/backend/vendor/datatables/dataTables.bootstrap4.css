@@ -126,10 +126,15 @@ div.dataTables_scrollHead table.dataTable {
   margin-bottom: 0 !important;
 }
 
+*{
+  overflow-x: hidden;
+}
+
 div.dataTables_scrollBody table {
   border-top: none;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+  overflow-x: hidden;
 }
 div.dataTables_scrollBody table thead .sorting:before,
 div.dataTables_scrollBody table thead .sorting_asc:before,

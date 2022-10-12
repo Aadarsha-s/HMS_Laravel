@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+
 use App\Models\Room;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -14,8 +16,20 @@ class RoomCalendarController extends Controller
 {
     //
     public function index(){
-        $rooms = Room::all();
-        return view('admin.room_calendar.view')->with('rooms',$rooms);    
+     return view('admin.room_calendar.view');   
     }
-  
+
+    public function show(Request $request, $id){       
+        for ($m=1; $m<=12; $m++) {
+            if($id == $m){
+                $res = Carbon::create(2022,$m)->daysInMonth;
+                break;
+            }
+        }       
+        $rooms = Room::all();
+        $reservations = Reservation::all();
+       
+        //echo $reservations->arrival_date;
+        return view('admin.room_calendar.show', compact('res','rooms','reservations'));
+    } 
 }

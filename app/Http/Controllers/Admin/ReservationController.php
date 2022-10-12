@@ -26,11 +26,19 @@ class ReservationController extends Controller
         return view('admin.reservation.create')->with('reservations',$reservations);
     }
 
+    public function show($id)
+    {
+        $reservations = Reservation::where('id', $id)->first();
+        $rooms = Room::all();
+        return view('admin.reservation.show', compact('reservations' , 'rooms'));
+    }
+
     public function store(Request $request)
     {
         $reservations = new Reservation();
         $reservations->reservation_for = $request->input('reservation_for');
         $reservations->reservation_type = $request->input('reservation_type');
+        $reservations->room_type = $request->input('room_type');
         $reservations->first_name = $request->input('first_name');
         $reservations->middle_name = $request->input('middle_name');
         $reservations->last_name = $request->input('last_name');
@@ -67,6 +75,7 @@ class ReservationController extends Controller
         $reservations = Reservation::find($id);
         $reservations->reservation_for = $request->input('reservation_for');
         $reservations->reservation_type = $request->input('reservation_type');
+        $reservations->room_type = $request->input('room_type');
         $reservations->first_name = $request->input('first_name');
         $reservations->middle_name = $request->input('middle_name');
         $reservations->last_name = $request->input('last_name');

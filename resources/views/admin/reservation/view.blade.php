@@ -2,10 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-
     <!-- Page Heading -->
-   
-
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
@@ -29,22 +26,13 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>reservation_for</th> 
-                                <th>reservation_type</th>
-                                <th>first_name</th>
-                                <th>middle_name</th>            
-                                <th>last_name</th>
-                                <th>address</th>
+                                <th>Reservation_for</th> 
+                                <th>Reservation_type</th>
+                                <th>Name</th>
                                 <th>contact</th>
-                                <th>email</th>
-                                <th>payment_mode</th>
-                                <th>total_rate</th>
                                 <th>arrival_date</th>
-                                <th>arrival_time</th>
                                 <th>departure_date</th>
-                                <th>departure_time</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -54,21 +42,11 @@
                                 <td>{{ $reservation->reservation_for }}</td> 
                                 <td>{{ $reservation->reservation_type }}</td>
                                 <td>{{ $reservation->first_name }}</td>
-                                <td>{{ $reservation->middle_name }}</td>            
-                                <td>{{ $reservation->last_name }}</td>
-                                <td>{{ $reservation->address }}</td>
                                 <td>{{ $reservation->contact}}</td>
-                                <td>{{ $reservation->email }}</td>
-                                <td>{{ $reservation->payment_mode }}</td>
-                                <td>{{ $reservation->total_rate}}</td>
                                 <td>{{ $reservation->arrival_date}}</td>
-                                <td>{{ $reservation->arrival_time}}</td>
                                 <td>{{ $reservation->departure_date}}</td>
-                                <td>{{ $reservation->departure_time}}</td>
-                              
-                                
                                 <td>
-                                    <a href="{{ route('admin.rooms.show', $reservation->id) }}" class="btn btn-info">
+                                    <a href="{{ route('admin.reservation.show', $reservation->id) }}" class="btn btn-info">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                     <a href="{{ route('admin.reservation.edit', $reservation->id) }}" class="btn btn-info">

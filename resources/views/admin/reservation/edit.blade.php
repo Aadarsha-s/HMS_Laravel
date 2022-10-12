@@ -48,6 +48,18 @@
                         <option value="Not Guaranted"  {{ $reservations->reservation_for == "Not Guaranted" ? 'selected' : '' }}>Not Guaranted</option>
                     </select>
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="request_type">{{ __('Room Type') }}</label>
+                    <select class="form-control" aria-label="Default select example" id="room_type" name="room_type" required>
+                        <option value="Single" {{ $reservations->room_type == "Single" ? 'selected' : '' }}>Single</option>
+                        <option value="Double" {{ $reservations->room_type == "Double" ? 'selected' : '' }}>Double</option>
+                        <option value="Triple" {{ $reservations->room_type == "Triple" ? 'selected' : '' }}>Triple</option>
+                        <option value="Quad" {{ $reservations->room_type == "Quad" ? 'selected' : '' }}>Quad</option>
+                        <option value="Twin" {{ $reservations->room_type == "Twin" ? 'selected' : '' }}>Twin</option>
+                        <option value="Cabana" {{ $reservations->room_type == "Cabana" ? 'selected' : '' }}>Cabana</option>
+                        <option value="Connecting Rooms" {{ $reservations->room_type == "Connecting Rooms" ? 'selected' : '' }}>Connecting Rooms</option>
+                    </select>
+                </div>
             </div>
             <br><br>
             {{-- personal info --}}
@@ -96,7 +108,9 @@
                 <table class="table">
                     <thead>
                       <tr>
+                        <th scope="col">Room No.</th>
                         <th scope="col">Room Type</th>
+                        <th scope="col">Bed Type</th>
                         {{-- <th scope="col">Total No.</th> --}}
                          <th scope="col">Pax</th>{{--number of person allowed per package --}}
                         <th scope="col">Rate</th>
@@ -106,7 +120,9 @@
                     <tbody>
                        @foreach($rooms as $room)
                       <tr data-entry-id="{{ $room->id }}" class="txtMult">
+                        <td>{{ $room->room_number }}</td> 
                         <td>{{ $room->room_type }}</td> 
+                        <td>{{ $room->bed_type }}</td>
                         {{-- <td>
                             <div class="col-md-4">    
                                 <input type="number" class="form-control" id="total_no" name="total_no"/>
@@ -118,6 +134,8 @@
                       </tr>
                       @endforeach
                       <tr>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <th scope="row" colspan="2">Total Pax <input type="number" class="form-control col-md-2" id="totalpax" name="totalpax" readonly/>                  
                         </th>

@@ -12,138 +12,20 @@
             </div>
             <div class="card-body">
                 <ul class="list">
-                    <li class="list-items"><a href="#">Jan</a></li>
-                    <li class="list-items"><a href="#news">Feb</a></li>
-                    <li class="list-items"><a href="#contact">Mar</a></li>
-                    <li class="list-items"><a href="#contact">Apr</a></li>
-                    <li class="list-items"><a href="#contact">May</a></li>
-                    <li class="list-items"><a href="#contact">Jun</a></li>
-                    <li class="list-items"><a href="#contact">Jul</a></li>
-                    <li class="list-items"><a href="#contact">Aug</a></li>
-                    <li class="list-items"><a href="#contact">Sep</a></li>
-                    <li class="list-items"><a href="#contact">Oct</a></li>
-                    <li class="list-items"><a href="#contact">Nov</a></li>
-                    <li class="list-items"><a href="#contact">Dec</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',1) }}">Jan</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',2) }}">Feb</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',3) }}">Mar</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',4) }}">Apr</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',5) }}">May</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',6) }}">Jun</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',7) }}">Jul</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',8) }}">Aug</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',9) }}">Sep</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',10) }}">Oct</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',11) }}">Nov</a></li>
+                    <li class="list-items"><a href="{{ route('admin.room_calendar.show',12) }}">Dec</a></li>
                 </ul>
-                <table border="1" cellpadding="5" cellspacing="0">
-                    <thead>
-                        <th>Room No.</th>
-                        <th>Room Type</th>
-                        @for($i=1; $i<=31; $i++)
-                            <th>{{$i}}</th>
-
-                        @endfor
-                    </thead>
-                       
-                    <tbody>
-                        @foreach($rooms as $room)
-                            @if($room->room_type == "Single")   
-                                <tr data-entry-id="{{ $room->id }}">
-                                    <td>{{$room->room_number}}</td>
-                                    <td>{{$room->room_type}}</td>
-                                    @for($i=1; $i<=31; $i++)
-                                        @if($i == 23 || $i == 24 || $i == 25 || $i == 26 || $i == 27)
-                                            @for($j=$i; $j<=$i; $j++)
-                                                @if($room->room_status == "Occupied")
-                                                        <td class="occupied"></td>
-                                                    @elseif($room->room_status == "Vacant Dirty")
-                                                        <td class="dirty"></td>
-                                                    @elseif($room->room_status == "Vacant Clean")
-                                                        <td class="clean"></td>
-                                                    @elseif($room->room_status == "Reserved")
-                                                        <td class="reserved"></td>
-                                                    @elseif($room->room_status == "Out of Order")
-                                                        <td class="out"></td>
-                                                @endif
-                                            @endfor
-                                        @else
-                                            <td></td>
-                                        @endif
-                                    @endfor 
-                                </tr>    
-                                @endif
-                        @endforeach
-
-                        @foreach($rooms as $key => $room)
-                            @if($room->room_type == "Double")
-                            <tr data-entry-id="{{ $room->id }}">
-                                <td>{{$room->room_number}}</td>
-                                <td>{{$room->room_type}}</td>
-                                @for($i=1; $i<=31; $i++)
-                                    <td></td>
-                                @endfor
-                            </tr>    
-                            @endif
-                        @endforeach
-
-                        @foreach($rooms as $key => $room)
-                            @if($room->room_type == "Triple")
-                            <tr data-entry-id="{{ $room->id }}">
-                                <td>{{$room->room_number}}</td>
-                                <td>{{$room->room_type}}</td>
-                                @for($i=1; $i<=31; $i++)
-                                    <td></td>
-                                @endfor
-                            </tr>    
-                            @endif
-                        @endforeach
-
-                        @foreach($rooms as $room)
-                            @if($room->room_type == "Quad")
-                            <tr data-entry-id="{{ $room->id }}">
-                                <td>{{$room->room_number}}</td>
-                                <td>{{$room->room_type}}</td>
-                                @for($i=1; $i<=31; $i++)
-                                    <td></td>
-                                @endfor
-                            </tr>    
-                            @endif
-                        @endforeach
-
-                        @foreach($rooms as $key => $room)
-                            @if($room->room_type == "Twin")
-                            <tr data-entry-id="{{ $room->id }}">
-                                <td>{{$room->room_number}}</td>
-                                <td>{{$room->room_type}}</td>
-                                @for($i=1; $i<=31; $i++)
-                                    <td></td>
-                                @endfor
-                            </tr>    
-                            @endif
-                        @endforeach
-                
-                        @foreach($rooms as $key => $room)
-                            @if($room->room_type == "Cabana")
-                            <tr data-entry-id="{{ $room->id }}">
-                                <td>{{$room->room_number}}</td>
-                                <td>{{$room->room_type}}</td>
-                                @for($i=1; $i<=31; $i++)
-                                    <td></td>
-                                @endfor
-                            </tr>    
-                            @endif
-                        @endforeach
-
-                        @foreach($rooms as $key => $room)
-                            @if($room->room_type == "Connecting Rooms")
-                            <tr data-entry-id="{{ $room->id }}">
-                                <td>{{$room->room_number}}</td>
-                                <td>{{$room->room_type}}</td>
-                                @for($i=1; $i<=31; $i++)
-                                    <td></td>
-                                @endfor
-                            </tr>    
-                            @endif
-                        @endforeach
-
-                    </tbody>
-                  </table>
-                  <br>
-                  <h6 class="boxed occupied" >Occupied</h6>
-                  <h6 class="boxed dirty">Vacant Dirty</h6>
-                  <h6 class="boxed clean">Vacant Clean</h6> 
-                  <h6 class="boxed reserved">Reserved</h6> 
-                  <h6 class="boxed out">Out of Order</h6> 
+               
             </div>
         </div>
     <!-- Content Row -->

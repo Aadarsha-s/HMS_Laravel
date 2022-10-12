@@ -12,6 +12,7 @@ class Reservation extends Model
     protected $fillable = [
         'reservation_for',
         'reservation_type',
+        'room_type',
         'first_name',
         'middle_name',            
         'last_name',

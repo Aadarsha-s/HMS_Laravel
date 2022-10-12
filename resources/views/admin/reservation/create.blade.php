@@ -48,6 +48,20 @@
                                 <option value="Not Guaranted">Not Guaranted</option>
                             </select>
                         </div>
+                        <div class="form-group col-md-3">
+                            <label for="request_type">{{ __('Room Type') }}</label>
+                            <select class="form-control" aria-label="Default select example" id="room_type" name="room_type" required>
+                                <option selected>Select Room Type</option>
+                                <option value="Single">Single</option>
+                                <option value="Double">Double</option>
+                                <option value="Triple">Triple</option>
+                                <option value="Quad">Quad</option>
+                                <option value="Twin">Twin</option>
+                                <option value="Cabana">Cabana</option>
+                                <option value="Connecting Rooms">Connecting Rooms</option>
+                            </select>
+                        </div>
+
                     </div>
                     <br><br>
                     {{-- personal info --}}
@@ -99,6 +113,7 @@
                                 
                                 <th scope="col">Room No.</th>
                                 <th scope="col">Room Type</th>
+                                <th scope="col">Bed Type</th>
                                 {{-- <th scope="col">Total No.</th> --}}
                                  <th scope="col">Pax</th>{{--number of person allowed per package --}}
                                 <th scope="col">Rate</th>
@@ -110,6 +125,7 @@
                               <tr data-entry-id="{{ $room->id }}" class="txtMult">
                                 <td>{{ $room->room_number }}</td> 
                                 <td>{{ $room->room_type }}</td> 
+                                <td>{{ $room->bed_type }}</td>
                                 {{-- <td>
                                     <div class="col-md-4">    
                                         <input type="number" class="form-control" id="total_no" name="total_no"/>
@@ -123,11 +139,11 @@
                               <tr>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <th scope="row" colspan="2">Total Pax <input type="number" class="form-control col-md-2" id="totalpax" name="totalpax" readonly/>                  
                                 </th>
                                 <th scope="row" class="table-group">Total Amount<input type="number" class="form-control col-md-4 totalamt" id="totalamt" name="totalamt" readonly/>                  
                               </tr>
-                            
                             </tbody>
                         
                           </table>    
