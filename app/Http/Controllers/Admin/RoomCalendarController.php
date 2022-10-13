@@ -19,7 +19,7 @@ class RoomCalendarController extends Controller
      return view('admin.room_calendar.view');   
     }
 
-    public function show(Request $request, $id){       
+    public function show($id){       
         for ($m=1; $m<=12; $m++) {
             if($id == $m){
                 $res = Carbon::create(2022,$m)->daysInMonth;

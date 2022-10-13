@@ -15,7 +15,17 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
+            
+            <li class="nav-item">
+            
+            
+            
+                        <a class="collapse-item {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}" href="{{ route('admin.permissions.index') }}"> <i class="fa fa-briefcase mr-2"></i> {{ __('Permissions') }}</a>
+                        <a class="collapse-item {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}" href="{{ route('admin.roles.index') }}"><i class="fa fa-briefcase mr-2"></i> {{ __('Roles') }}</a>
+                        <a class="collapse-item {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}"> <i class="fa fa-user mr-2"></i> {{ __('Users') }}</a>
+            
+            
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.rooms.index') }}" data-toggle="" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <span>{{ __('Room') }}</span>

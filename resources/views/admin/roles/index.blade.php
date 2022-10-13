@@ -3,66 +3,67 @@
 @section('content')
 <div class="container-fluid">
 
-    <!-- Page Heading -->
-   
-
     <!-- Content Row -->
         <div class="card">
-            <div class="card-header py-3 d-flex">
-                <h3 class="m-0 font-weight-bold text-primary">
-                    {{ __('List of Business Source') }}
-                </h3>
+        <div class="card-header py-3 d-flex">
+                <h6 class="m-0 font-weight-bold text-primary">
+                {{ __('Roles') }}
+                </h6>
                 <div class="ml-auto">
-                    {{-- @can('room_create') --}}
-                    <a href="{{ route('admin.business_source.create') }}" class="btn btn-primary">
+                    @can('role_create')
+                    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
-                        <span class="text">{{ __('Business Source') }}</span>
+                        <span class="text">{{ __('New role') }}</span>
                     </a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover datatable datatable-room" cellspacing="0" width="100%">
+                    <table class="table table-bordered table-striped table-hover datatable datatable-Role" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Source</th>
-                                <th>Apply Commission</th>
+                                 <th width="10">
+
+                                </th>
+                                <th>No</th>
+                                <th>Title</th>
+                                <th>Permission</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($business_sources as $business_source)
-                            <tr data-entry-id="{{ $business_source->id }}">
+                            @forelse($roles as $role)
+                            <tr data-entry-id="{{ $role->id }}">
                                 <td></td>
-                                <td>{{ $business_source->source }}</td>
-                                <td>{{ $business_source->apply_commission }}</td>
-                            
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $role->title }}</td>
                                 <td>
-                                    {{-- <a href="{{ route('admin.rooms.show', $business_source->id) }}" class="btn btn-info">
-                                        <i class="fa fa-eye"></i>
-                                    </a> --}}
-                                    <a href="{{ route('admin.business_source.edit', $business_source->id) }}" class="btn btn-success btn-circle">
+                                    @foreach($role->permissions as $key => $item)
+                                        <span class="badge badge-info">{{ $item->title }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-info">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
-                                    <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.business_source.destroy', $business_source->id) }}" method="POST">
+                                    <form onclick="return confirm('are you sure ? ')"  class="d-inline" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger btn-circle">
+                                        <button class="btn btn-danger">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
                                 </td>
                             </tr>
-                            {{-- @empty
+                            @empty
                             <tr>
-                                <td colspan="9" class="text-center">{{ __('Data Empty') }}</td>
-                            </tr> --}}
-                        @endforeach    
-                        </tbody> 
+                                <td colspan="7" class="text-center">{{ __('Data Empty') }}</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -76,10 +77,10 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-  let deleteButtonTrans = 'Delete selected'
+  let deleteButtonTrans = 'delete selected'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.business_source.mass_destroy') }}",
+    url: "{{ route('admin.roles.mass_destroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -89,7 +90,7 @@
         alert('zero selected')
         return
       }
-      if (confirm('Are you sure ?')) {
+      if (confirm('are you sure ?')) {
         $.ajax({
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           method: 'POST',
@@ -104,7 +105,7 @@
     order: [[ 1, 'asc' ]],
     pageLength: 50,
   });
-  $('.datatable-room:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-Role:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

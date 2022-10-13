@@ -26,12 +26,12 @@
             <div class="card-body">
                 <form action="{{ route('admin.rooms.store') }}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="room_number">{{ __('Room Number') }}</label>
                         <input type="number" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('Room_number') }}" required/>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="room_type">{{ __('Room Type') }}</label>
                         <select class="form-control" aria-label="Default select example" id="room_type" name="room_type" required>
                             <option selected>Select Room Type</option>
@@ -45,7 +45,7 @@
                           </select>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="bed_type">{{ __('Bed Type') }}</label>
                         <select class="form-control" aria-label="Default select example" id="bed_type" name="bed_type" required>
                             <option selected>Select Bed Type</option>
@@ -58,13 +58,13 @@
                           </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="room_rate">{{ __('Room Rate') }}</label>
                         <input type="number" class="form-control" id="room_rate" placeholder="" name="room_rate" value="{{ old('Room_rate') }}" required/>
                     </div>
 
                     
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="room_status">{{ __('Room Status') }}</label>
                         <select class="form-control" aria-label="Default select example" id="room_status" name="room_status" required>
                             <option selected>Select Room Status</option>
@@ -75,9 +75,14 @@
                             <option value="Out of Order">Out of Order</option>
                           </select>
                     </div>
-
-                    
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Save') }}</button>
+                    <div class="form-row" style="margin-left: 7px">
+                        <div class="form-group col-md-1">
+                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

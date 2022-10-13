@@ -32,11 +32,15 @@
                 </div>
                 <div class="form-group col-md-3">    
                     <label for="reservation_type">{{ __('Reservations Type ') }}</label>
-                    <input type="text" class="form-control" id="reservation_type" name="reservation_type" value="{{ old('reservation_for', $reservations->reservation_type) }}" readonly>
+                    <input type="text" class="form-control" id="reservation_type" name="reservation_type" value="{{ old('reservation_type', $reservations->reservation_type) }}" readonly>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="request_type">{{ __('Room Type') }}</label>
-                    <input type="text" class="form-control" id="room_type" name="room_type" value="{{ old('reservation_for', $reservations->room_type) }}" readonly>
+                    <label for="room_type">{{ __('Room Type') }}</label>
+                    <input type="text" class="form-control" id="room_type" name="room_type" value="{{ old('room_type', $reservations->room_type) }}" readonly>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="room_number">{{ __('Room Number') }}</label>
+                    <input type="number" class="form-control" id="room_number" name="room_number" value="{{ old('room_number', $reservations->room_number) }}" readonly>
                 </div>
             </div>
             <br><br>
@@ -55,13 +59,13 @@
                     <label for="last_name">{{ __('Last Name ') }}</label>
                     <input type="text" class="form-control"  id="last_name" name="last_name" value="{{ old('last_name', $reservations->last_name) }}" readonly>
                 </div>
-            </div>
-
-            <div class="form-row">
                 <div class="form-group col-md-3">    
                     <label for="address">{{ __('Address ') }}</label>
                     <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $reservations->address) }}" readonly>
                 </div>
+            </div>
+
+            <div class="form-row">    
                 <div class="form-group col-md-3">    
                     <label for="contact">{{ __('Contact ') }}</label>
                     <input type="number" class="form-control"  id="contact" name="contact" value="{{ old('contact', $reservations->contact) }}" readonly>
@@ -70,14 +74,12 @@
                     <label for="email">{{ __('Email') }}</label>
                     <input type="email" class="form-control"  id="email" name="email" value="{{ old('email', $reservations->email) }}" readonly>
                 </div>
-            </div>
-            
-            <div class="form-row">
                 <div class="form-group col-md-3">    
                     <label for="passport_no">{{ __('Passport Number') }}</label>
                     <input type="number" class="form-control"  id="passport_no" name="passport_no" value="{{ old('passport_no', $reservations->passport_no) }}" readonly>
                 </div>
             </div>
+            
             <br><br>
 
             <h4>Room Info</h4><br>

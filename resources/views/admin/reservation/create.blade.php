@@ -49,7 +49,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="request_type">{{ __('Room Type') }}</label>
+                            <label for="room_type">{{ __('Room Type') }}</label>
                             <select class="form-control" aria-label="Default select example" id="room_type" name="room_type" required>
                                 <option selected>Select Room Type</option>
                                 <option value="Single">Single</option>
@@ -60,8 +60,30 @@
                                 <option value="Cabana">Cabana</option>
                                 <option value="Connecting Rooms">Connecting Rooms</option>
                             </select>
-                        </div>
-
+                        </div>        
+                        <div class="form-group col-md-3">
+                            <label for="room_number">{{ __('Room Number') }}</label>
+                            <select class="form-control" aria-label="Default select example" id="room_number" name="room_number" required>
+                                <option selected>Select Room Number</option>
+                                @foreach($reservations as $room)
+                                    @if ($room->room_type == "Single")
+                                        <option class="Single" value="{{$room->room_number}}">{{$room->room_number}}</option>
+                                    @elseif ($room->room_type == "Double")
+                                        <option class="Double" value="{{$room->room_number}}">{{$room->room_number}}</option>
+                                    @elseif ($room->room_type == "Triple")
+                                        <option class="Triple" value="{{$room->room_number}}">{{$room->room_number}}</option>
+                                    @elseif ($room->room_type == "Quad")
+                                        <option class="Quad" value="{{$room->room_number}}">{{$room->room_number}}</option>
+                                    @elseif ($room->room_type == "Twin")
+                                        <option class="Twin" value="{{$room->room_number}}">{{$room->room_number}}</option>
+                                    @elseif ($room->room_type == "Cabana")
+                                        <option class="Cabana" value="{{$room->room_number}}">{{$room->room_number}}</option>
+                                    @elseif ($room->room_type == "Connecting Rooms")
+                                        <option class="ConnectingRooms" value="{{$room->room_number}}">{{$room->room_number}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div> 
                     </div>
                     <br><br>
                     {{-- personal info --}}
@@ -79,13 +101,14 @@
                             <label for="last_name">{{ __('Last Name ') }}</label>
                             <input type="text" class="form-control"  id="last_name" name="last_name" required>
                         </div>
-                    </div>
-
-                    <div class="form-row">
                         <div class="form-group col-md-3">    
                             <label for="address">{{ __('Address ') }}</label>
                             <input type="text" class="form-control" id="address" name="address" required>
                         </div>
+
+                    </div>
+
+                    <div class="form-row">
                         <div class="form-group col-md-3">    
                             <label for="contact">{{ __('Contact ') }}</label>
                             <input type="number" class="form-control"  id="contact" name="contact" required>
@@ -94,14 +117,12 @@
                             <label for="email">{{ __('Email') }}</label>
                             <input type="email" class="form-control"  id="email" name="email">
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
                         <div class="form-group col-md-3">    
                             <label for="passport_no">{{ __('Passport Number') }}</label>
                             <input type="number" class="form-control"  id="passport_no" name="passport_no">
                         </div>
                     </div>
+                    
                     <br><br>
 
                     <h4>Room Info</h4><br>
@@ -122,27 +143,127 @@
                             </thead>
                             <tbody>
                                @foreach($reservations as $room)
+                               @if ($room->room_type == "Single")
                               <tr data-entry-id="{{ $room->id }}" class="txtMult">
-                                <td>{{ $room->room_number }}</td> 
-                                <td>{{ $room->room_type }}</td> 
-                                <td>{{ $room->bed_type }}</td>
+                                <td class="Single">{{ $room->room_number }}</td> 
+                                <td class="Single">{{ $room->room_type }}</td> 
+                                <td class="Single">{{ $room->bed_type }}</td>
                                 {{-- <td>
                                     <div class="col-md-4">    
                                         <input type="number" class="form-control" id="total_no" name="total_no"/>
                                     </div>
                                 </td> --}}
-                                <td class="table-group"><input type="number" class="form-control col-md-3 pax" id="pax"/></td>
-                                <td class="table-group">Rs. <input type="hidden" readonly class="rate" value="{{ old('room_rate', $room->room_rate) }}"/>{{ $room->room_rate }}</td>
-                                <td class="table-group"><input type="number" class="form-control col-md-4 total" readonly/></td>
+                                <td class="table-group Single "><input type="number" class="form-control col-md-3 pax" id="pax"/></td>
+                                <td class="table-group Single ">Rs. <input type="hidden" readonly class="rate" value="{{ old('room_rate', $room->room_rate) }}"/>{{ $room->room_rate }}</td>
+                                <td class="table-group Single "><input type="number" class="form-control col-md-5 total" readonly/></td>
                               </tr>
+                              @endif
+                          
+                              @if ($room->room_type == "Double")
+                              <tr data-entry-id="{{ $room->id }}" class="txtMult">
+                                <td class="Double">{{ $room->room_number }}</td> 
+                                <td class="Double">{{ $room->room_type }}</td> 
+                                <td class="Double">{{ $room->bed_type }}</td>
+                                {{-- <td>
+                                    <div class="col-md-4">    
+                                        <input type="number" class="form-control" id="total_no" name="total_no"/>
+                                    </div>
+                                </td> --}}
+                                <td class="table-group Double "><input type="number" class="form-control col-md-3 pax" id="pax"/></td>
+                                <td class="table-group Double ">Rs. <input type="hidden" readonly class="rate" value="{{ old('room_rate', $room->room_rate) }}"/>{{ $room->room_rate }}</td>
+                                <td class="table-group Double "><input type="number" class="form-control col-md-5 total" readonly/></td>
+                              </tr>
+                              @endif
+                          
+                              @if ($room->room_type == "Triple")
+                              <tr data-entry-id="{{ $room->id }}" class="txtMult">
+                                <td class="Triple">{{ $room->room_number }}</td> 
+                                <td class="Triple">{{ $room->room_type }}</td> 
+                                <td class="Triple">{{ $room->bed_type }}</td>
+                                {{-- <td>
+                                    <div class="col-md-4">    
+                                        <input type="number" class="form-control" id="total_no" name="total_no"/>
+                                    </div>
+                                </td> --}}
+                                <td class="table-group Triple "><input type="number" class="form-control col-md-3 pax" id="pax"/></td>
+                                <td class="table-group Triple ">Rs. <input type="hidden" readonly class="rate" value="{{ old('room_rate', $room->room_rate) }}"/>{{ $room->room_rate }}</td>
+                                <td class="table-group Triple "><input type="number" class="form-control col-md-5 total" readonly/></td>
+                              </tr>
+                              @endif
+                          
+                              @if ($room->room_type == "Quad")
+                              <tr data-entry-id="{{ $room->id }}" class="txtMult">
+                                <td class="Quad">{{ $room->room_number }}</td> 
+                                <td class="Quad">{{ $room->room_type }}</td> 
+                                <td class="Quad">{{ $room->bed_type }}</td>
+                                {{-- <td>
+                                    <div class="col-md-4">    
+                                        <input type="number" class="form-control" id="total_no" name="total_no"/>
+                                    </div>
+                                </td> --}}
+                                <td class="table-group Quad "><input type="number" class="form-control col-md-3 pax" id="pax"/></td>
+                                <td class="table-group Quad ">Rs. <input type="hidden" readonly class="rate" value="{{ old('room_rate', $room->room_rate) }}"/>{{ $room->room_rate }}</td>
+                                <td class="table-group Quad "><input type="number" class="form-control col-md-5 total" readonly/></td>
+                              </tr>
+                              @endif
+                          
+                              @if ($room->room_type == "Twin")
+                              <tr data-entry-id="{{ $room->id }}" class="txtMult">
+                                <td class="Twin">{{ $room->room_number }}</td> 
+                                <td class="Twin">{{ $room->room_type }}</td> 
+                                <td class="Twin">{{ $room->bed_type }}</td>
+                                {{-- <td>
+                                    <div class="col-md-4">    
+                                        <input type="number" class="form-control" id="total_no" name="total_no"/>
+                                    </div>
+                                </td> --}}
+                                <td class="table-group Twin "><input type="number" class="form-control col-md-3 pax" id="pax"/></td>
+                                <td class="table-group Twin ">Rs. <input type="hidden" readonly class="rate" value="{{ old('room_rate', $room->room_rate) }}"/>{{ $room->room_rate }}</td>
+                                <td class="table-group Twin "><input type="number" class="form-control col-md-5 total" readonly/></td>
+                              </tr>
+                              @endif
+                          
+                              @if ($room->room_type == "Cabana")
+                              <tr data-entry-id="{{ $room->id }}" class="txtMult">
+                                <td class="Cabana">{{ $room->room_number }}</td> 
+                                <td class="Cabana">{{ $room->room_type }}</td> 
+                                <td class="Cabana">{{ $room->bed_type }}</td>
+                                {{-- <td>
+                                    <div class="col-md-4">    
+                                        <input type="number" class="form-control" id="total_no" name="total_no"/>
+                                    </div>
+                                </td> --}}
+                                <td class="table-group Cabana "><input type="number" class="form-control col-md-3 pax" id="pax"/></td>
+                                <td class="table-group Cabana ">Rs. <input type="hidden" readonly class="rate" value="{{ old('room_rate', $room->room_rate) }}"/>{{ $room->room_rate }}</td>
+                                <td class="table-group Cabana "><input type="number" class="form-control col-md-5 total" readonly/></td>
+                              </tr>
+                              @endif
+                          
+                               @if ($room->room_type == "Connecting Rooms")
+                              <tr data-entry-id="{{ $room->id }}" class="txtMult">
+                                <td class="ConnectingRooms">{{ $room->room_number }}</td> 
+                                <td class="ConnectingRooms">{{ $room->room_type }}</td> 
+                                <td class="ConnectingRooms">{{ $room->bed_type }}</td>
+                                {{-- <td>
+                                    <div class="col-md-4">    
+                                        <input type="number" class="form-control" id="total_no" name="total_no"/>
+                                    </div>
+                                </td> --}}
+                                <td class="table-group ConnectingRooms "><input type="number" class="form-control col-md-3 pax" id="pax"/></td>
+                                <td class="table-group ConnectingRooms ">Rs. <input type="hidden" readonly class="rate" value="{{ old('room_rate', $room->room_rate) }}"/>{{ $room->room_rate }}</td>
+                                <td class="table-group ConnectingRooms "><input type="number" class="form-control col-md-5 total" readonly/></td>
+                              </tr>
+                              @endif
                               @endforeach
+
+
                               <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <th scope="row" colspan="2">Total Pax <input type="number" class="form-control col-md-2" id="totalpax" name="totalpax" readonly/>                  
                                 </th>
-                                <th scope="row" class="table-group">Total Amount<input type="number" class="form-control col-md-4 totalamt" id="totalamt" name="totalamt" readonly/>                  
+                                <th scope="row" class="table-group">Total Amount<input type="number" class="form-control col-md-5 totalamt" id="totalamt" name="totalamt" readonly/>                  
                               </tr>
                             </tbody>
                         
@@ -245,7 +366,15 @@
                             <input type="time" class="form-control"  id="departure_time" name="departure_time" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Save') }}</button>
+                    
+                    <div class="form-row" style="margin-left: -5px">
+                        <div class="form-group col-md-1">
+                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -257,6 +386,79 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
+    $(document).ready(function () {
+      $("select#room_type").on('change', function () {
+         if ($(this).val() == "Single") {
+         // Default show the Choose Size Option
+          $('#room_number option:first').attr('selected', 'selected'); 
+          $(".Single").show();
+          $(".Double").hide();
+          $(".Triple").hide();
+          $(".Quad").hide();
+          $(".Twin").hide();
+          $(".Cabana").hide();
+          $(".ConnectingRooms").hide();
+          
+         } else if ($(this).val() == "Double") {
+          $('#room_number option:first').attr('selected', 'selected');
+          $(".Double").show();
+          $(".Single").hide();
+          $(".Triple").hide();
+          $(".Quad").hide();
+          $(".Twin").hide();
+          $(".Cabana").hide();
+          $(".ConnectingRooms").hide();
+         } else if ($(this).val() == "Triple") {
+          $('#room_number option:first').attr('selected', 'selected');
+          $(".Triple").show();
+          $(".Single").hide();
+          $(".Double").hide();
+          $(".Quad").hide();
+          $(".Twin").hide();
+          $(".Cabana").hide();
+          $(".ConnectingRooms").hide();
+        } else if ($(this).val() == "Quad") {
+          $('#room_number option:first').attr('selected', 'selected');
+          $(".Quad").show();
+          $(".Single").hide();
+          $(".Double").hide();
+          $(".Triple").hide();
+          $(".Twin").hide();
+          $(".Cabana").hide();
+          $(".ConnectingRooms").hide();
+         } else if ($(this).val() == "Twin") {
+          $('#room_number option:first').attr('selected', 'selected');
+          $(".Twin").show();
+          $(".Single").hide();
+          $(".Double").hide();
+          $(".Triple").hide();
+          $(".Quad").hide();
+          $(".Cabana").hide();
+          $(".ConnectingRooms").hide();
+         } else if ($(this).val() == "Cabana") {
+          $('#room_number option:first').attr('selected', 'selected');
+          $(".Cabana").show();
+          $(".Single").hide();
+          $(".Double").hide();
+          $(".Triple").hide();
+          $(".Twin").hide();
+          $(".Quad").hide();
+          $(".ConnectingRooms").hide();
+         } else if ($(this).val() == "Connecting Rooms") {
+          $('#room_number option:first').attr('selected', 'selected');
+          $(".ConnectingRooms").show();
+          $(".Quad").hide();
+          $(".Single").hide();
+          $(".Double").hide();
+          $(".Triple").hide();
+          $(".Twin").hide();
+          $(".Cabana").hide();
+         
+         } 
+
+      });
+  });
+
     $(document).ready(function () {
        $(".txtMult input").keyup(multInputs);
        function multInputs() {
@@ -325,5 +527,6 @@
     $('#arrival_date').attr('min', minDate);
     $('#departure_date').attr('min', minDate);
     });
+
 </script>
 @endsection

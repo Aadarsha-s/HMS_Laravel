@@ -13,6 +13,7 @@ class Reservation extends Model
         'reservation_for',
         'reservation_type',
         'room_type',
+        'room_number',
         'first_name',
         'middle_name',            
         'last_name',

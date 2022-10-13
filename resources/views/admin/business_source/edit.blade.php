@@ -27,18 +27,25 @@
                 <form action="{{ route('admin.business_source.update', $business_sources->id )}}" method="POST">
                     @csrf
                     @method('put')
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="source">{{ __('Source') }}</label>
                         <input type="text" class="form-control" id="source" placeholder="" name="source" value="{{ old('source', $business_sources->source) }}" />      
                     </div>     
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="apply_commission">{{ __('Apply Commission') }}</label><br>
                         <input type="radio" name="apply_commission" value="Yes" {{ $business_sources->apply_commission == "Yes" ? 'checked' : '' }}/> Yes
                         &nbsp;&nbsp;&nbsp;<input type="radio" name="apply_commission" value="No" {{ $business_sources->apply_commission == "No" ? 'checked' : '' }}/> No
                     </div>
                     
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Save') }}</button>
+                    <div class="form-row" style="margin-left: 7px">
+                        <div class="form-group col-md-1">
+                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

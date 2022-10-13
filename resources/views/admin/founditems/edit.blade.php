@@ -27,37 +27,44 @@
                 <form action="{{ route('admin.founditems.update', $founditems->id )}}" method="POST">
                     @csrf
                     @method('put')
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="item_name">{{ __('Item Name') }}</label>
                         <input type="text" class="form-control" id="item_name" placeholder="" name="item_name" value="{{ old('item_name', $founditems->item_name) }}" />
                     </div>      
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="room_no">{{ __('Room Number') }}</label>
                         <input type="number" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('room_number', $founditems->room_number) }}" />
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="found_date">{{ __('Found Date') }}</label>
                         <input type="date" class="form-control" id="found_date" placeholder="" name="found_date" value="{{ old('found_date', $founditems->found_date) }}" />
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="description">{{ __('Description') }}</label>
                         <textarea class="form-control" id="your_summernote" rows="4" name="description" placeholder="" >{{ old('description',$founditems->description) }}</textarea>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="found_by">{{ __('Found By') }}</label>
                         <input type="text" class="form-control" id="found_by" placeholder="" name="found_by" value="{{ old('found_by', $founditems->found_by) }}" />
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="reported_to">{{ __('Reported To') }}</label>
                         <input type="text" class="form-control" id="reported_to" placeholder="" name="reported_to" value="{{ old('reported_to', $founditems->reported_to) }}" />
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Save') }}</button>
+                    <div class="form-row" style="margin-left: 7px">
+                        <div class="form-group col-md-1">
+                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

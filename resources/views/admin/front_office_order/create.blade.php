@@ -26,12 +26,12 @@
             <div class="card-body">
                 <form action="{{ route('admin.front_office_order.store') }}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="room_number">{{ __('Room Number') }}</label>
                         <input type="number" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('Room_number') }}" required/>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="service">{{ __('Service') }}</label>
                         <select class="form-control" aria-label="Default select example" id="service" name="service" required>
                             <option selected>Select Service</option>
@@ -47,24 +47,30 @@
                           </select>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="quantity">{{ __('Quantity') }}</label>
                         <input type="number" class="form-control" id="quantity" placeholder="" name="quantity" value="{{ old('quantity') }}" required/>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="rate">{{ __('Rate') }}</label>
                         <input type="number" class="form-control" id="rate" placeholder="" name="rate" value="{{ old('rate') }}" required/>
                     </div>
 
                     
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="description">{{ __('Description') }}</label>
-                        <textarea class="form-control" id="your_summernote" rows="4" placeholder="" name="description"></textarea>
+                        <textarea class="form-control" id="your_summernote" rows="4" placeholder="" name="description" value="{{ old('description') }}"></textarea>
                     </div>
 
-                    
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Save') }}</button>
+                    <div class="form-row" style="margin-left: 7px">
+                        <div class="form-group col-md-1">
+                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

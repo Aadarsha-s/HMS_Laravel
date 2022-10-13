@@ -27,11 +27,11 @@
                 <form action="{{ route('admin.front_office_order.update', $frontoffices->id )}}" method="POST">
                     @csrf
                     @method('put')
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="room_number">{{ __('Room Number') }}</label>
                         <input type="text" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('room_number', $frontoffices->room_number) }}" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="service">{{ __('Service') }}</label>
                         <select class="form-control" aria-label="Default select example" id="service" name="service">
                             <option value="Reservation" {{ $frontoffices->service == "Reservation" ? 'selected' : '' }}>Reservation</option>
@@ -45,23 +45,30 @@
                             <option value="Telephone Operator" {{ $frontoffices->service == "Telephone Operator" ? 'selected' : '' }}>Telephone Operator</option>
                           </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="quantity">{{ __('Quantity') }}</label>
                         <input type="number" class="form-control" id="quantity" placeholder="" name="quantity" value="{{ old('quantity', $frontoffices->quantity) }}"/>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="rate">{{ __('Rate') }}</label>
                         <input type="number" class="form-control" id="rate" placeholder="" name="rate" value="{{ old('rate', $frontoffices->rate) }}" />
                     </div>
 
                     
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="description">{{ __('Description') }}</label>
                         <textarea class="form-control" id="your_summernote" rows="4" name="description" placeholder="" >{{ old('description',$frontoffices->description) }}</textarea>
                     </div>
-
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Save') }}</button>
+                    
+                    <div class="form-row" style="margin-left: 7px">
+                        <div class="form-group col-md-1">
+                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

@@ -26,12 +26,12 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Reservation_for</th> 
-                                <th>Reservation_type</th>
+                                <th>Reservation_For</th> 
+                                <th>Reservation_Type</th>
                                 <th>Name</th>
-                                <th>contact</th>
-                                <th>arrival_date</th>
-                                <th>departure_date</th>
+                                <th>Contact</th>
+                                <th>Arrival</th>
+                                <th>Departure</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,17 +45,17 @@
                                 <td>{{ $reservation->contact}}</td>
                                 <td>{{ $reservation->arrival_date}}</td>
                                 <td>{{ $reservation->departure_date}}</td>
-                                <td>
-                                    <a href="{{ route('admin.reservation.show', $reservation->id) }}" class="btn btn-info">
+                                <td style="white-space: nowrap;">
+                                    <a href="{{ route('admin.reservation.show', $reservation->id) }}" class="btn btn-dark btn-circle">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('admin.reservation.edit', $reservation->id) }}" class="btn btn-info">
+                                    <a href="{{ route('admin.reservation.edit', $reservation->id) }}" class="btn btn-success btn-circle">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
                                     <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.reservation.destroy', $reservation->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger">
+                                        <button class="btn btn-danger btn-circle">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>

@@ -39,6 +39,7 @@ class ReservationController extends Controller
         $reservations->reservation_for = $request->input('reservation_for');
         $reservations->reservation_type = $request->input('reservation_type');
         $reservations->room_type = $request->input('room_type');
+        $reservations->room_number = $request->input('room_number');
         $reservations->first_name = $request->input('first_name');
         $reservations->middle_name = $request->input('middle_name');
         $reservations->last_name = $request->input('last_name');
@@ -76,6 +77,7 @@ class ReservationController extends Controller
         $reservations->reservation_for = $request->input('reservation_for');
         $reservations->reservation_type = $request->input('reservation_type');
         $reservations->room_type = $request->input('room_type');
+        $reservations->room_number = $request->input('room_number');
         $reservations->first_name = $request->input('first_name');
         $reservations->middle_name = $request->input('middle_name');
         $reservations->last_name = $request->input('last_name');

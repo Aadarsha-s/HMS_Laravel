@@ -52,13 +52,13 @@
                                     {{-- <a href="{{ route('admin.rooms.show', $founditem->id) }}" class="btn btn-info">
                                         <i class="fa fa-eye"></i>
                                     </a> --}}
-                                    <a href="{{ route('admin.founditems.edit', $founditem->id) }}" class="btn btn-info">
+                                    <a href="{{ route('admin.founditems.edit', $founditem->id) }}" class="btn btn-success btn-circle">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
                                     <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.founditems.destroy', $founditem->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger">
+                                        <button class="btn btn-danger btn-circle">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>

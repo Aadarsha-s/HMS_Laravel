@@ -25,7 +25,8 @@
                     <li class="list-items"><a href="{{ route('admin.room_calendar.show',11) }}">Nov</a></li>
                     <li class="list-items"><a href="{{ route('admin.room_calendar.show',12) }}">Dec</a></li>
                 </ul>
-
+                {{-- {{url()->current()}} <br>
+                {{ Request::segment(3)}} --}}
                 <table border="1" cellpadding="5" cellspacing="0">
                     <thead>
                         <th>Room No.</th>
@@ -40,17 +41,18 @@
                             <?php 
                                 $arr_day = date('d', strtotime($reserve->arrival_date));
                                 $dep_day = date('d', strtotime($reserve->departure_date));
+                                $month = date('m', strtotime($reserve->departure_date));
+                                $month_check = Request::segment(3);
                             ?>
+                          
                         @foreach($rooms as $room)
-                            @if($room->room_type == "Single" && $reserve->room_type == "Single")   
+                            @if($room->room_type == "Single" && $reserve->room_type == "Single" && $room->room_number == $reserve->room_number && $month == $month_check)   
                                 <tr data-entry-id="{{ $room->id }}">
                                     <td>{{$room->room_number}}</td>
                                     <td>{{$room->room_type}}</td>
-                                    
                                         @for($i=1; $i<=$res; $i++)
-                                            
-                                            @if($i == $arr_day || $i == $dep_day)
-                                                @for($j = $i; $j <= $i; $j++)
+                                            @if($i == $arr_day)
+                                                @for($j=$i; $j<=$dep_day; $j++)
                                                     @if($room->room_status == "Occupied")
                                                             <td class="occupied"></td>
                                                         @elseif($room->room_status == "Vacant Dirty")
@@ -61,8 +63,9 @@
                                                             <td class="reserved"></td>
                                                         @elseif($room->room_status == "Out of Order")
                                                             <td class="out"></td>
-                                                    @endif
+                                                    @endif    
                                                 @endfor
+                                                <?php $i = $dep_day?>
                                             @else
                                                 <td></td>
                                             @endif
@@ -77,27 +80,29 @@
                             <?php 
                                 $arr_day = date('d', strtotime($reserve->arrival_date));
                                 $dep_day = date('d', strtotime($reserve->departure_date));
+                                $month = date('m', strtotime($reserve->departure_date));
+                                $month_check = Request::segment(3);
                             ?>
-                            @if($room->room_type == "Double" && $reserve->room_type == "Double")
+                            @if($room->room_type == "Double" && $reserve->room_type == "Double" && $room->room_number == $reserve->room_number && $month == $month_check)
                             <tr data-entry-id="{{ $room->id }}">
                                 <td>{{$room->room_number}}</td>
                                 <td>{{$room->room_type}}</td>
                                     @for($i=1; $i<=$res; $i++)
-                                        
-                                    @if($i == $arr_day || $i == $dep_day)
-                                        @for($j = $i; $j <= $i; $j++)
+                                        @if($i == $arr_day)
+                                            @for($j=$i; $j<=$dep_day; $j++)
                                                 @if($room->room_status == "Occupied")
-                                                        <td class="occupied"></td>
-                                                    @elseif($room->room_status == "Vacant Dirty")
-                                                        <td class="dirty"></td>
-                                                    @elseif($room->room_status == "Vacant Clean")
-                                                        <td class="clean"></td>
-                                                    @elseif($room->room_status == "Reserved")
-                                                        <td class="reserved"></td>
-                                                    @elseif($room->room_status == "Out of Order")
-                                                        <td class="out"></td>
-                                                @endif
+                                                    <td class="occupied"></td>
+                                                @elseif($room->room_status == "Vacant Dirty")
+                                                    <td class="dirty"></td>
+                                                @elseif($room->room_status == "Vacant Clean")
+                                                    <td class="clean"></td>
+                                                @elseif($room->room_status == "Reserved")
+                                                    <td class="reserved"></td>
+                                                @elseif($room->room_status == "Out of Order")
+                                                    <td class="out"></td>
+                                                @endif    
                                             @endfor
+                                            <?php $i = $dep_day?>
                                         @else
                                             <td></td>
                                         @endif
@@ -112,15 +117,16 @@
                             <?php 
                                 $arr_day = date('d', strtotime($reserve->arrival_date));
                                 $dep_day = date('d', strtotime($reserve->departure_date));
+                                $month = date('m', strtotime($reserve->departure_date));
+                                $month_check = Request::segment(3);
                             ?>
-                            @if($room->room_type == "Triple" && $reserve->room_type == "Triple")
+                            @if($room->room_type == "Triple" && $reserve->room_type == "Triple" && $room->room_number == $reserve->room_number && $month == $month_check)
                             <tr data-entry-id="{{ $room->id }}">
                                 <td>{{$room->room_number}}</td>
                                 <td>{{$room->room_type}}</td>
                                     @for($i=1; $i<=$res; $i++)
-                                        
-                                    @if($i == $arr_day || $i == $dep_day)
-                                        @for($j = $i; $j <= $i; $j++)
+                                        @if($i == $arr_day)
+                                            @for($j=$i; $j<=$dep_day; $j++)
                                                 @if($room->room_status == "Occupied")
                                                         <td class="occupied"></td>
                                                     @elseif($room->room_status == "Vacant Dirty")
@@ -133,13 +139,13 @@
                                                         <td class="out"></td>
                                                 @endif
                                             @endfor
+                                            <?php $i = $dep_day?>
                                         @else
                                             <td></td>
                                         @endif
                                     @endfor 
                             </tr>    
                             @endif
-                            
                             @endforeach
                         @endforeach
 
@@ -148,15 +154,16 @@
                             <?php 
                                 $arr_day = date('d', strtotime($reserve->arrival_date));
                                 $dep_day = date('d', strtotime($reserve->departure_date));
+                                $month = date('m', strtotime($reserve->departure_date));
+                                $month_check = Request::segment(3);
                             ?>
-                            @if($room->room_type == "Quad" && $reserve->room_type == "Quad")
+                            @if($room->room_type == "Quad" && $reserve->room_type == "Quad" && $room->room_number == $reserve->room_number && $month == $month_check)
                             <tr data-entry-id="{{ $room->id }}">
                                 <td>{{$room->room_number}}</td>
                                 <td>{{$room->room_type}}</td>
-                                    @for($i=1; $i<=$res; $i++)
-                                        
-                                    @if($i == $arr_day || $i == $dep_day)
-                                        @for($j = $i; $j <= $i; $j++)
+                                    @for($i=1; $i<=$res; $i++)            
+                                        @if($i == $arr_day)
+                                            @for($j = $i; $j <= $dep_day; $j++)
                                                 @if($room->room_status == "Occupied")
                                                         <td class="occupied"></td>
                                                     @elseif($room->room_status == "Vacant Dirty")
@@ -169,6 +176,7 @@
                                                         <td class="out"></td>
                                                 @endif
                                             @endfor
+                                            <?php $i = $dep_day?>
                                         @else
                                             <td></td>
                                         @endif
@@ -183,15 +191,16 @@
                             <?php 
                              $arr_day = date('d', strtotime($reserve->arrival_date));
                               $dep_day = date('d', strtotime($reserve->departure_date));
+                              $month = date('m', strtotime($reserve->departure_date));
+                                $month_check = Request::segment(3);
                              ?>
-                             @if($room->room_type == "Twin" && $reserve->room_type == "Twin")
+                             @if($room->room_type == "Twin" && $reserve->room_type == "Twin" && $room->room_number == $reserve->room_number && $month == $month_check)
                             <tr data-entry-id="{{ $room->id }}">
                                 <td>{{$room->room_number}}</td>
                                 <td>{{$room->room_type}}</td>
                                         @for($i=1; $i<=$res; $i++)
-                                            
-                                        @if($i == $arr_day || $i == $dep_day)
-                                                @for($j = $i; $j <= $i; $j++)
+                                            @if($i == $arr_day)
+                                                @for($j = $i; $j <= $dep_day; $j++)
                                                     @if($room->room_status == "Occupied")
                                                             <td class="occupied"></td>
                                                         @elseif($room->room_status == "Vacant Dirty")
@@ -204,6 +213,7 @@
                                                             <td class="out"></td>
                                                     @endif
                                                 @endfor
+                                                <?php $i = $dep_day?>
                                             @else
                                                 <td></td>
                                             @endif
@@ -219,16 +229,17 @@
                             <?php 
                             $arr_day = date('d', strtotime($reserve->arrival_date));
                             $dep_day = date('d', strtotime($reserve->departure_date));
+                            $month = date('m', strtotime($reserve->departure_date));
+                                $month_check = Request::segment(3);
                             ?>
                         
-                            @if($room->room_type == "Cabana" && $reserve->room_type == "Cabana")
+                            @if($room->room_type == "Cabana" && $reserve->room_type == "Cabana" && $room->room_number == $reserve->room_number && $month == $month_check)
                             <tr data-entry-id="{{ $room->id }}">
                                 <td>{{$room->room_number}}</td>
                                 <td>{{$room->room_type}}</td>
                                         @for($i=1; $i<=$res; $i++)
-                                            
-                                        @if($i == $arr_day || $i == $dep_day)
-                                            @for($j = $i; $j <= $i; $j++)
+                                            @if($i == $arr_day)
+                                                @for($j = $i; $j <= $dep_day; $j++)
                                                     @if($room->room_status == "Occupied")
                                                             <td class="occupied"></td>
                                                         @elseif($room->room_status == "Vacant Dirty")
@@ -241,6 +252,7 @@
                                                             <td class="out"></td>
                                                     @endif
                                                 @endfor
+                                                <?php $i = $dep_day?>
                                             @else
                                                 <td></td>
                                             @endif
@@ -255,16 +267,16 @@
                                     <?php 
                                         $arr_day = date('d', strtotime($reserve->arrival_date));
                                         $dep_day = date('d', strtotime($reserve->departure_date));
+                                        $month = date('m', strtotime($reserve->departure_date));
+                                $month_check = Request::segment(3);
                                     ?>
-                            @if($room->room_type == "Connecting Rooms" && $reserve->room_type == "Connecting Rooms")
+                            @if($room->room_type == "Connecting Rooms" && $reserve->room_type == "Connecting Rooms" && $room->room_number == $reserve->room_number && $month == $month_check)
                             <tr data-entry-id="{{ $room->id }}">
                                 <td>{{$room->room_number}}</td>
                                 <td>{{$room->room_type}}</td>
-                                
                                         @for($i=1; $i<=$res; $i++)
-                                            
-                                        @if($i == $arr_day || $i == $dep_day)
-                                            @for($j = $i; $j <= $i; $j++)
+                                            @if($i == $arr_day)
+                                                @for($j = $i; $j <= $dep_day; $j++)
                                                     @if($room->room_status == "Occupied")
                                                             <td class="occupied"></td>
                                                         @elseif($room->room_status == "Vacant Dirty")
@@ -277,6 +289,7 @@
                                                             <td class="out"></td>
                                                     @endif
                                                 @endfor
+                                                <?php $i = $dep_day?>
                                             @else
                                                 <td></td>
                                             @endif
@@ -365,4 +378,6 @@
     background-color: rgb(189, 188, 212);
     text-decoration: none;
     }
+ 
+
 </style>
