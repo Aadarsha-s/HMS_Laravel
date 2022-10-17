@@ -18,6 +18,7 @@ Route::get('', function () {
     return view('auth.login');
 });
 
+Route::get('/home',[\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['isAdmin','auth'],'prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('permissions', \App\Http\Controllers\Admin\PermissionController::class);

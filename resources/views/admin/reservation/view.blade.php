@@ -6,9 +6,9 @@
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
-                <h3 class="m-0 font-weight-bold text-primary">
+                <h5 class="m-0 font-weight-bold text-primary">
                     {{ __('List of Reservation') }}
-                </h3>
+                </h5>
                 <div class="ml-auto">
                     {{-- @can('room_create') --}}
                     <a href="{{ route('admin.reservation.create') }}" class="btn btn-primary">

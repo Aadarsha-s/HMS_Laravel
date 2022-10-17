@@ -6,18 +6,18 @@
     <!-- Content Row -->
         <div class="card">
         <div class="card-header py-3 d-flex">
-                <h6 class="m-0 font-weight-bold text-primary">
+                <h5 class="m-0 font-weight-bold text-primary">
                 {{ __('Roles') }}
-                </h6>
+                </h5>
                 <div class="ml-auto">
-                    @can('role_create')
+                    {{-- @can('role_create') --}}
                     <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
                         <span class="text">{{ __('New role') }}</span>
                     </a>
-                    @endcan
+                    {{-- @endcan --}}
                 </div>
             </div>
             <div class="card-body">
@@ -46,13 +46,13 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-info">
+                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-success btn-circle">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
                                     <form onclick="return confirm('are you sure ? ')"  class="d-inline" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger">
+                                        <button class="btn btn-danger btn-circle">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
@@ -16,13 +17,27 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check()) {
-            return redirect('/');
+        if(Auth::check())
+        {
+            if(Auth::user()->role_as == '1')
+            {
+                return $next($request);
+            }
+            else
+            {
+                return redirect('/home')->with('status','Access Denied! As you are not admin');
+            }
         }
-        if (auth()->user()->roles()->where('title', 'user')->count() > 0) {
-            return redirect('/');
+        else{
+            return redirect('/login')->with('status','Please Login first..');
         }
+        // if (!auth()->check()) {
+        //     return redirect('/');
+        // }
+        // if (auth()->user()->roles()->where('title', 'user')->count() > 0) {
+        //     return redirect('/');
+        // }
 
-        return $next($request);
+        // return $next($request);
     }
 }

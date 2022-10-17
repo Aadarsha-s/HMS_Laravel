@@ -6,9 +6,9 @@
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
-                <h3 class="m-0 font-weight-bold text-primary">
-                    {{ __('Room Calendar') }}
-                </h3>
+                <h5 class="m-0 font-weight-bold text-primary">
+                    {{ __('Reservation Calendar') }}
+                </h5>
             </div>
             <div class="card-body">
                 <ul class="list">
