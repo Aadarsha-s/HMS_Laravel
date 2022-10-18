@@ -9,9 +9,9 @@
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
-                <h3 class="m-0 font-weight-bold text-primary">
+                <h5 class="m-0 font-weight-bold text-primary">
                     {{ __('Check Room Position') }}
-                </h3>
+                </h5>
             </div>
             <div class="card-body container">
             

@@ -29,7 +29,12 @@
                     @method('put')
                     <div class="form-group col-md-6">
                         <label for="room_number">{{ __('Room Number') }}</label>
-                        <input type="text" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('room_number', $frontoffices->room_number) }}" />
+                        {{-- <input type="text" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('room_number', $frontoffices->room_number) }}" /> --}}
+                        <select class="form-control" aria-label="Default select example" id="room_number" name="room_number" required>
+                            @foreach($rooms as $room)
+                                <option value="{{$room->room_number}}" {{ $frontoffices->room_number == $room->room_number ? 'selected' : '' }}>{{$room->room_number}}</option>
+                                @endforeach
+                        </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="service">{{ __('Service') }}</label>

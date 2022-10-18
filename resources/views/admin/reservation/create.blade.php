@@ -31,7 +31,7 @@
                         <div class="form-group col-md-3">
                             <label for="reservation_for">{{ __('Reservation For ') }}</label>
                             <select class="form-control" aria-label="Default select example" id="reservation_for" name="reservation_for" required>
-                                <option selected>Select Reservation For</option>
+                                <option value="">Select Reservation For</option>
                                 <option value="Single">Single</option>
                                 <option value="Double">Double</option>
                                 <option value="Triple">Triple</option>
@@ -43,7 +43,7 @@
                         <div class="form-group col-md-3">    
                             <label for="reservation_type">{{ __('Reservation Type ') }}</label>
                             <select class="form-control" aria-label="Default select example" id="reservation_type" name="reservation_type" required>
-                                <option selected>Select Reservation Type</option>
+                                <option value="">Select Reservation Type</option>
                                 <option value="Guaranted">Guaranted</option>
                                 <option value="Not Guaranted">Not Guaranted</option>
                             </select>
@@ -51,7 +51,7 @@
                         <div class="form-group col-md-3">
                             <label for="room_type">{{ __('Room Type') }}</label>
                             <select class="form-control" aria-label="Default select example" id="room_type" name="room_type" required>
-                                <option selected>Select Room Type</option>
+                                <option value="">Select Room Type</option>
                                 <option value="Single">Single</option>
                                 <option value="Double">Double</option>
                                 <option value="Triple">Triple</option>
@@ -64,7 +64,7 @@
                         <div class="form-group col-md-3">
                             <label for="room_number">{{ __('Room Number') }}</label>
                             <select class="form-control" aria-label="Default select example" id="room_number" name="room_number" required>
-                                <option selected>Select Room Number</option>
+                                <option value="">Select Room Number</option>
                                 @foreach($reservations as $room)
                                     @if ($room->room_type == "Single")
                                         <option class="Single" value="{{$room->room_number}}">{{$room->room_number}}</option>
@@ -274,7 +274,7 @@
                         <div class="form-group col-md-3">
                             <label for="request_type">{{ __('Request Type') }}</label>
                             <select class="form-control" aria-label="Default select example" id="request_type" name="request_type" required>
-                                <option selected>Select Request Type</option>
+                                <option value="">Select Request Type</option>
                                 <option value="Direct Guest">Direct Guest</option>
                                 <option value="Travel Agencies">Travel Agencies</option>
                                 <option value="Central Reservation System">Central Reservation System</option>
@@ -293,7 +293,7 @@
                         <div class="form-group col-md-3">
                             <label for="room_plan">{{ __('Room Plan') }}</label>
                             <select class="form-control" aria-label="Default select example" id="room_plan" name="room_plan" required>
-                                <option selected>Select Room Plan</option>
+                                <option value="">Select Room Plan</option>
                                 <option value="American Plan">American Plan</option>
                                 <option value="Modified American Plan">Modified American Plan</option>
                                 <option value="Continental Plan">Continental Plan</option>
@@ -308,7 +308,7 @@
                         <div class="form-group col-md-3">
                             <label for="payment_mode">{{ __('Payment Mode') }}</label>
                             <select class="form-control" aria-label="Default select example" id="payment_mode" name="payment_mode" required>
-                                <option selected>Select Payment Mode</option>
+                                <option value="">Select Payment Mode</option>
                                 <option value="Cash in hand">Cash in hand</option>
                                 <option value="Credit Card">Credit Card</option>
                                 <option value="Debit Card">Debit Card</option>

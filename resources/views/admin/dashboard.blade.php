@@ -10,19 +10,34 @@
 
 <!-- Content Row -->
     <div class="row">
-
-        <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-4 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                               Users</div> <strong>{{$user_count}}</strong>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                Room</div> <strong>{{$room_count}}</strong>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-door-closed fa-2x text-gray-300"></i>
+                            <i class="fas fa-door-closed fa-2x text-gray-500"></i>
                         </div>
                     </div>
                 </div>
@@ -40,7 +55,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-male fa-2x text-gray-300"></i>
+                            <i class="fas fa-person fa-3x text-gray-500"></i>
                         </div>
                     </div>
                 </div>
@@ -62,7 +77,7 @@
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-suitcase-rolling fa-2x text-gray-300"></i>
+                            <i class="fas fa-suitcase-rolling fa-2x text-gray-500"></i>
                         </div>
                     </div>
                 </div>
@@ -70,6 +85,10 @@
         </div>
 
         <!-- Pending Requests Card Example -->
+        
+    </div>
+
+    <div class="row">
         <div class="col-xl-3 col-md-4 mb-4">
             <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
@@ -80,15 +99,12 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comment fa-2x text-gray-300"></i>
+                            <i class="fas fa-comment fa-2x text-gray-500"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-xl-3 col-md-4 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
@@ -99,7 +115,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-suitcase fa-2x text-gray-300"></i>
+                            <i class="fas fa-suitcase fa-2x text-gray-500"></i>
                         </div>
                     </div>
                 </div>
@@ -107,16 +123,16 @@
         </div>
 
         <div class="col-xl-3 col-md-4 mb-4">
-            <div class="card border-left-secondary shadow h-100 py-2">
+            <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                Wakeup Call</div> <strong>{{$wakeupcall_count}}</strong>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-phone-alt fa-2x text-gray-300"></i>
+                            <i class="fas fa-phone-alt fa-2x text-gray-500"></i>
                         </div>
                     </div>
                 </div>
@@ -133,29 +149,14 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-credit-card fa-2x text-gray-300"></i>
+                            <i class="fas fa-credit-card fa-2x text-gray-500"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-4 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                               Users</div> <strong>{{$user_count}}</strong>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
     <!-- Content Row -->
 

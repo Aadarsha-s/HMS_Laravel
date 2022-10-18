@@ -16,7 +16,7 @@
 <!-- Content Row -->
         <div class="card shadow">
             <div class="card-header py-3 d-flex">
-            <h1 class="h3 mb-0 text-gray-800">{{ __('Lost Complain') }}</h1>
+            <h1 class="h3 mb-0 text-gray-800">{{ __('Add Lost Complain') }}</h1>
                 <div class="ml-auto">
                     <a href="{{ route('admin.lostcomplain.index') }}" class="btn btn-primary">
                         <span class="text">{{ __('Go Back') }}</span>
@@ -32,7 +32,12 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="room_number">{{ __('Room Number') }}</label>
-                        <input type="number" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('Room_number') }}" required/>
+                        <select class="form-control" aria-label="Default select example" id="room_number" name="room_number" required>
+                            <option value="">Select Room Number</option>
+                            @foreach($rooms as $room)
+                                <option value="{{$room->room_number}}">{{$room->room_number}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group col-md-6">

@@ -16,7 +16,7 @@
 <!-- Content Row -->
         <div class="card shadow">
             <div class="card-header py-3 d-flex">
-            <h1 class="h3 mb-0 text-gray-800">{{ __('Front Office Order') }}</h1>
+            <h1 class="h3 mb-0 text-gray-800">{{ __('Add Front Office Order') }}</h1>
                 <div class="ml-auto">
                     <a href="{{ route('admin.front_office_order.index') }}" class="btn btn-primary">
                         <span class="text">{{ __('Go Back') }}</span>
@@ -28,13 +28,19 @@
                     @csrf
                     <div class="form-group col-md-6">
                         <label for="room_number">{{ __('Room Number') }}</label>
-                        <input type="number" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('Room_number') }}" required/>
+                        {{-- <input type="number" class="form-control" id="room_number" placeholder="" name="room_number" value="{{ old('Room_number') }}" required/> --}}
+                        <select class="form-control" aria-label="Default select example" id="room_number" name="room_number" required>
+                            <option value="">Select Room Number</option>
+                            @foreach($rooms as $room)
+                                <option value="{{$room->room_number}}">{{$room->room_number}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="service">{{ __('Service') }}</label>
                         <select class="form-control" aria-label="Default select example" id="service" name="service" required>
-                            <option selected>Select Service</option>
+                            <option value="">Select Service</option>
                             <option value="Reservation">Reservation</option>
                             <option value="Reception">Reception</option>
                             <option value="Registration">Registration</option>
@@ -60,7 +66,7 @@
                     
                     <div class="form-group col-md-6">
                         <label for="description">{{ __('Description') }}</label>
-                        <textarea class="form-control" id="your_summernote" rows="4" placeholder="" name="description" value="{{ old('description') }}"></textarea>
+                        <textarea class="form-control" id="your_summernote" rows="4" placeholder="" name="description" value="{{ old('description') }}" required></textarea>
                     </div>
 
                     <div class="form-row" style="margin-left: 7px">

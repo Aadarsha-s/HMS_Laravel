@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Wakeupcall;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -18,7 +19,8 @@ class WakeupCallController extends Controller
 
     public function create()
     {
-        return view('admin.wakeupcall.create');
+        $rooms = Room::all();
+        return view('admin.wakeupcall.create', compact('rooms'));
     }
 
     public function store(Request $request)
@@ -39,7 +41,8 @@ class WakeupCallController extends Controller
     public function edit($id)
     {
         $wakeupcalls = Wakeupcall::find($id);
-        return view('admin.wakeupcall.edit', compact('wakeupcalls'));
+        $rooms = Room::all();
+        return view('admin.wakeupcall.edit', compact('wakeupcalls','rooms'));
     }
 
     public function update(Request $request,$id)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Models\Frontoffice;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -20,7 +21,8 @@ class FrontOfficeController extends Controller
 
     public function create()
     {
-        return view('admin.front_office_order.create');
+        $rooms = Room::all();
+        return view('admin.front_office_order.create', compact('rooms'));
     }
 
     public function store(Request $request)
@@ -41,7 +43,8 @@ class FrontOfficeController extends Controller
     public function edit($id)
     {
         $frontoffices = Frontoffice::find($id);
-        return view('admin.front_office_order.edit', compact('frontoffices'));
+        $rooms = Room::all();
+        return view('admin.front_office_order.edit', compact('frontoffices','rooms'));
     }
 
     public function update(Request $request,$id)

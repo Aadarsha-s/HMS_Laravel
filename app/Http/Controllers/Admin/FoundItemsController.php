@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Models\Founditem;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -21,7 +22,8 @@ class FoundItemsController extends Controller
 
     public function create()
     {
-        return view('admin.founditems.create');
+        $rooms = Room::all();
+        return view('admin.founditems.create',compact('rooms'));
     }
 
     public function store(Request $request)
@@ -43,7 +45,8 @@ class FoundItemsController extends Controller
     public function edit($id)
     {
         $founditems = Founditem::find($id);
-        return view('admin.founditems.edit', compact('founditems'));
+        $rooms = Room::all();
+        return view('admin.founditems.edit', compact('founditems','rooms'));
     }
 
     public function update(Request $request,$id)

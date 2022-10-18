@@ -34,7 +34,7 @@
                     <div class="form-group col-md-6">
                         <label for="room_type">{{ __('Room Type') }}</label>
                         <select class="form-control" aria-label="Default select example" id="room_type" name="room_type" required>
-                            <option selected>Select Room Type</option>
+                            <option value="">Select Room Type</option>
                             <option value="Single">Single</option>
                             <option value="Double">Double</option>
                             <option value="Triple">Triple</option>
@@ -48,7 +48,7 @@
                     <div class="form-group col-md-6">
                         <label for="bed_type">{{ __('Bed Type') }}</label>
                         <select class="form-control" aria-label="Default select example" id="bed_type" name="bed_type" required>
-                            <option selected>Select Bed Type</option>
+                            <option value="">Select Bed Type</option>
                             <option value="Full">Full</option>
                             <option value="Double">Double</option>
                             <option value="Four Poster">Four Poster</option>
@@ -67,7 +67,7 @@
                     <div class="form-group col-md-6">
                         <label for="room_status">{{ __('Room Status') }}</label>
                         <select class="form-control" aria-label="Default select example" id="room_status" name="room_status" required>
-                            <option selected>Select Room Status</option>
+                            <option value="">Select Room Status</option>
                             <option value="Occupied">Occupied</option>
                             <option value="Vacant Dirty">Vacant Dirty</option>
                             <option value="Vacant Clean">Vacant Clean</option>

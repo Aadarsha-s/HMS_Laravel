@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Lostcomplain;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -18,7 +19,8 @@ class LostComplainController extends Controller
 
     public function create()
     {
-        return view('admin.lostcomplain.create');
+        $rooms = Room::all();
+        return view('admin.lostcomplain.create',compact('rooms'));
     }
 
     public function store(Request $request)
@@ -39,7 +41,8 @@ class LostComplainController extends Controller
     public function edit($id)
     {
         $lostcomplain = Lostcomplain::find($id);
-        return view('admin.lostcomplain.edit', compact('lostcomplain'));
+        $rooms = Room::all();
+        return view('admin.lostcomplain.edit', compact('rooms','lostcomplain'));
     }
 
     public function update(Request $request,$id)
