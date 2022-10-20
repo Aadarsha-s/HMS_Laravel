@@ -36,7 +36,7 @@ class LoginController extends Controller
         }
         else
         {
-            return redirect('/home')->with('status','Logged In successfull');
+            return redirect('/user/home')->with('status','Logged In successfull');
         }
     }
     /**

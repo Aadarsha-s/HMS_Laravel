@@ -2,10 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-
     <!-- Page Heading -->
-   
-
     <!-- Content Row -->
         <div class="card">
             <div class="card-header py-3 d-flex">
@@ -40,7 +37,6 @@
                             @forelse($permissions as $permission)
                             <tr data-entry-id="{{ $permission->id }}">
                                 <td>
-
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $permission->title }}</td>

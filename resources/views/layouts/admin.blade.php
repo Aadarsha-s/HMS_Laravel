@@ -12,8 +12,12 @@
      <!-- CSRF Token -->
      <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Hotel Admin Page</title>
-
+     @if (Auth::user()->role_as == '1')
+      <title>Hotel Admin Page</title>
+     @else
+      <title>Hotel User Page</title>
+     @endif
+     
     <!-- Custom fonts for this template-->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />

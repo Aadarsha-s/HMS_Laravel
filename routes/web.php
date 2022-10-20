@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +18,13 @@ use App\Http\Controllers\Admin\ReservationController;
 Route::get('', function () {
     return view('auth.login');
 });
+Route::middleware('checkuser')->group(function(){
+    Route::resource('rooms', \App\Http\Controllers\Admin\RoomController::class);
+    Route::get('room_position', [\App\Http\Controllers\Admin\RoomController::class, 'show'])->name('room_position.show');
+    Route::delete('rooms_mass_destroy', [\App\Http\Controllers\Admin\RoomController::class, 'massDestroy'])->name('rooms.mass_destroy');
+});
 
-Route::get('/home',[\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/user/home',[\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['isAdmin','auth'],'prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('permissions', \App\Http\Controllers\Admin\PermissionController::class);

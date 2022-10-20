@@ -1,12 +1,16 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center">
-        <div class="sidebar-brand-text mx-3">{{ __('Hotel Admin Page') }}</div>
+        @if (Auth::user()->role_as == '1')
+            <div class="sidebar-brand-text mx-3">{{ __('Hotel Admin Page') }}</div>
+        @else
+            <div class="sidebar-brand-text mx-3">{{ __('Hotel User Page') }}</div> 
+        @endif
     </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
-
+    
     <li class="nav-item {{ request()->is('admin/dashboard') || request()->is('admin/dashboard') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.dashboard.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -15,8 +19,6 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="collapse" href="#" role="button"
             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -33,6 +35,7 @@
         </div>
     </li>
 
+    
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="collapse" href="#" role="button"
             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -48,6 +51,7 @@
             </a>
         </div>
     </li>
+    
 
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="collapse" href="#" role="button"
