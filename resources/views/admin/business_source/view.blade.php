@@ -13,14 +13,14 @@
                     {{ __('List of Business Source') }}
                 </h5>
                 <div class="ml-auto">
-                    {{-- @can('room_create') --}}
-                    <a href="{{ route('admin.business_source.create') }}" class="btn btn-primary">
+                    @can('business_source-create')
+                    <a href="{{ route('admin.business_source.create') }}" class="btn btn-primary btn-sm">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
                         <span class="text">{{ __('Business Source') }}</span>
                     </a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
@@ -45,16 +45,21 @@
                                     {{-- <a href="{{ route('admin.rooms.show', $business_source->id) }}" class="btn btn-info">
                                         <i class="fa fa-eye"></i>
                                     </a> --}}
-                                    <a href="{{ route('admin.business_source.edit', $business_source->id) }}" class="btn btn-success btn-circle">
+                                    @can('business_source-edit')
+                                    <a href="{{ route('admin.business_source.edit', $business_source->id) }}" class="btn btn-success btn-circle btn-sm">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
+                                    @endcan
+
+                                    @can('business_source-delete')
                                     <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.business_source.destroy', $business_source->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger btn-circle">
+                                        <button class="btn btn-danger btn-circle btn-sm">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                             {{-- @empty
@@ -76,15 +81,21 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-  let deleteButtonTrans = 'Delete selected'
+//   let dtother = {
+//     text: buttons,
+//     className: 'btn-sm',
+//   }
+  let deleteButtonTrans = 'Delete Selected'
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.business_source.mass_destroy') }}",
-    className: 'btn-danger',
+    className: 'btn-danger btn-sm',
     action: function (e, dt, node, config) {
+        @can('business_source-massDestroy')
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
           return $(entry).data('entry-id')
       });
+        @endcan
       if (ids.length === 0) {
         alert('zero selected')
         return

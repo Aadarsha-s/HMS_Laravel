@@ -16,9 +16,9 @@
 <!-- Content Row -->
         <div class="card shadow">
             <div class="card-header py-3 d-flex">
-            <h1 class="h3 mb-0 text-gray-800">{{ __('Add Reservation') }}</h1>
+            <h5 class="font-weight-bold text-primary">{{ __('Add Reservation') }}</h5>
                 <div class="ml-auto">
-                    <a href="{{ route('admin.reservation.index') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.reservation.index') }}" class="btn btn-primary btn-sm">
                         <span class="text">{{ __('Go Back') }}</span>
                     </a>
                 </div>
@@ -87,7 +87,7 @@
                     </div>
                     <br><br>
                     {{-- personal info --}}
-                    <h4>Personal Info</h4><br>
+                    <h5>Personal Info</h5><br>
                     <div class="form-row">
                         <div class="form-group col-md-3">    
                             <label for="first_name">{{ __('First Name ') }}</label>
@@ -125,7 +125,7 @@
                     
                     <br><br>
 
-                    <h4>Room Info</h4><br>
+                    <h5>Room Info</h5><br>
                     
                     {{-- <div class="form-row"> --}}
                         <table class="table">
@@ -288,7 +288,7 @@
                     </div>
                     <br><br>
 
-                    <h4>Reservation/ Payment Info</h4><br>
+                    <h5>Reservation/ Payment Info</h5><br>
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="room_plan">{{ __('Room Plan') }}</label>
@@ -318,7 +318,7 @@
                     </div>
                     <br><br>
 
-                    <h4>Rate Total</h4><br>
+                    <h5>Rate Total</h5><br>
                     <div class="form-row">
                         <table class="table table-sm">
                             <tbody>
@@ -344,7 +344,7 @@
                     </div>
                     <br><br>
 
-                    <h4>Stay Info</h4><br>
+                    <h5>Stay Info</h5><br>
                     <div class="form-row">
                         <div class="form-group col-md-3">    
                             <label for="arrival_date">{{ __('Arrival Date ') }}</label>
@@ -367,14 +367,8 @@
                         </div>
                     </div>
                     
-                    <div class="form-row" style="margin-left: -5px">
-                        <div class="form-group col-md-1">
-                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
-                        </div>
-                        <div class="form-group col-md-1">
-                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 0px">Save</button>
+                    <button type="reset" class="btn btn-primary btn-sm" style="">Cancel</button>
                 </form>
             </div>
         </div>

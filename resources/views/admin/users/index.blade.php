@@ -10,14 +10,14 @@
                 {{ __('Users') }}
                 </h5>
                 <div class="ml-auto">
-                    {{-- @can('user_create') --}}
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+                    @can('user-create')
+                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
                         <span class="text">{{ __('New user') }}</span>
                     </a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
@@ -36,37 +36,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($users as $user)
-                            <tr data-entry-id="{{ $user->id }}">
+                            @foreach ($data as $key => $user)
+                            <tr>
                                 <td></td>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    @foreach($user->roles as $key => $role)
-                                        <span class="badge badge-info">{{ $role->title }}</span>
-                                    @endforeach
+                                    @if(!empty($user->getRoleNames()))
+                                        @foreach($user->getRoleNames() as $val)
+                                            <label class="badge badge-dark">{{ $val }}</label>
+                                        @endforeach
+                                    @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-success btn-circle">
+                                    {{-- <a class="btn btn-success" href="{{ route('admin.users.show',$user->id) }}" readonly>Show</a> --}}
+                                    @can('user-edit')
+                                        <a class="btn btn-success btn-circle btn-sm" href="{{ route('admin.users.edit',$user->id) }}">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
-                                    <form onclick="return confirm('are you sure ? ')"  class="d-inline" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger btn-circle">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    @endcan
+                                    @can('user-delete')
+                                        {{-- {!! Form::open(['method' => 'DELETE','route' => ['admin.users.destroy', $user->id],'style'=>'display:inline']) !!}
+                                        {!! Form::submit('', ['class' => 'btn btn-danger btn-circle']) !!}
+                                        {!! Form::close() !!} --}}
+                                        <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-circle btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td colspan="7" class="text-center">{{ __('Data Empty') }}</td>
-                            </tr>
-                            @endforelse
+                        @endforeach
                         </tbody>
                     </table>
+                    {{ $data->render() }}
                 </div>
             </div>
         </div>

@@ -10,14 +10,14 @@
                 {{ __('Roles') }}
                 </h5>
                 <div class="ml-auto">
-                    {{-- @can('role_create') --}}
-                    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
+                    @can('role-create')
+                    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary btn-sm">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
                         <span class="text">{{ __('New role') }}</span>
                     </a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
@@ -26,45 +26,49 @@
                         <thead>
                             <tr>
                                  <th width="10">
-
                                 </th>
                                 <th>No</th>
-                                <th>Title</th>
+                                <th>Name</th>
                                 <th>Permission</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($roles as $role)
-                            <tr data-entry-id="{{ $role->id }}">
-                                <td></td>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $role->title }}</td>
-                                <td>
-                                    @foreach($role->permissions as $key => $item)
-                                        <span class="badge badge-info">{{ $item->title }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-success btn-circle">
-                                        <i class="fa fa-pencil-alt"></i>
-                                    </a>
-                                    <form onclick="return confirm('are you sure ? ')"  class="d-inline" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger btn-circle">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @empty
+                            @foreach ($data as $key => $role)
                             <tr>
-                                <td colspan="7" class="text-center">{{ __('Data Empty') }}</td>
+                                <td></td>
+                                <td>{{ $role->id }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td></td>
+                                <td>
+                                    @can('role-list')
+                                    <a class="btn btn-dark btn-circle btn-sm" href="{{ route('admin.roles.show',$role->id) }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    @endcan
+                                    @can('role-edit')
+                                        <a class="btn btn-success btn-circle btn-sm" href="{{ route('admin.roles.edit',$role->id) }}">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </a>
+                                    @endcan
+                                    @can('role-delete')
+                                        {{-- {!! Form::open(['method' => 'DELETE','route' => ['admin.roles.destroy', $role->id],'style'=>'display:inline']) !!}
+                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                        {!! Form::close() !!} --}}
+                                        <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-circle btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                </td>
                             </tr>
-                            @endforelse
+                        @endforeach
                         </tbody>
                     </table>
+                    {{ $data->render() }}
                 </div>
             </div>
         </div>

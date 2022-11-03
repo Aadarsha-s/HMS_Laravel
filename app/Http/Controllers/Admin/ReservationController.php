@@ -13,6 +13,15 @@ use Symfony\Component\HttpFoundation\Response;
 class ReservationController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:booking-list|booking-create|booking-edit|booking-show|booking-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:booking-create', ['only' => ['create','store']]);
+         $this->middleware('permission:booking-edit', ['only' => ['show','edit','update']]);
+         $this->middleware('permission:booking-show', ['only' => ['show']]);
+         $this->middleware('permission:booking-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $reservations = Reservation::all();

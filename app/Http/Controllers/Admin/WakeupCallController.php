@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Wakeupcall;
@@ -11,6 +12,15 @@ use Symfony\Component\HttpFoundation\Response;
 class WakeupCallController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:wakeupcall-list|wakeupcall-create|wakeupcall-edit|wakeupcall-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:wakeupcall-create', ['only' => ['create','store']]);
+         $this->middleware('permission:wakeupcall-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:wakeupcall-massDestroy', ['only' => ['massDestroy']]);
+         $this->middleware('permission:wakeupcall-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $wakeupcalls = Wakeupcall::all();

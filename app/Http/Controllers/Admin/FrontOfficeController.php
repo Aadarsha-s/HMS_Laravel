@@ -13,6 +13,14 @@ use Symfony\Component\HttpFoundation\Response;
 class FrontOfficeController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:frontoffice-list|frontoffice-create|frontoffice-edit|frontoffice-delete|frontoffice-massDestroy', ['only' => ['index','store']]);
+         $this->middleware('permission:frontoffice-create', ['only' => ['create','store']]);
+         $this->middleware('permission:frontoffice-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:frontoffice-massDestroy', ['only' => ['massDestroy']]);
+         $this->middleware('permission:frontoffice-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $frontoffices = Frontoffice::all();

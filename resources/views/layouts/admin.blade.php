@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,12 +9,11 @@
 
      <!-- CSRF Token -->
      <meta name="csrf-token" content="{{ csrf_token() }}">
-
-     @if (Auth::user()->role_as == '1')
-      <title>Hotel Admin Page</title>
-     @else
-      <title>Hotel User Page</title>
-     @endif
+     @if ( Auth::user()->name == "Admin")
+        <title>Hotel Admin Page</title>
+      @else
+        <title>Hotel User Page</title>
+      @endif
      
     <!-- Custom fonts for this template-->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -30,14 +27,21 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 
     @stack('style-alt')
-
+    {{-- <style>
+      
+@media (min-width: 768px) {
+  .sidebar.toggled .sidebar-brand .sidebar-brand-text {
+    display: block;
+  }
+}
+    </style> --}}
 </head>
-
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -175,9 +179,6 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
-    
-    
-    
     {{-- SummerNote Link --}}
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script>
@@ -186,7 +187,6 @@
           $('.dropdown-toggle').dropdown();
       });
     </script>
-
     <script>
         $(function() {
   let copyButtonTrans = 'copy'
@@ -272,5 +272,4 @@
     <script src="{{ asset('backend/js/demo/chart-pie-demo.js') }}"></script> -->
 
 </body>
-
 </html>

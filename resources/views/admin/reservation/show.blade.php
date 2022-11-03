@@ -16,7 +16,7 @@
 <!-- Content Row -->
 <div class="card shadow">
     <div class="card-header py-3 d-flex">
-    <h1 class="h3 mb-0 text-gray-800">{{ __('Show reservations') }}</h1>
+    <h5 class="font-weight-bold text-primary">{{ __('Show reservations') }}</h5>
         <div class="ml-auto">
             <a href="{{ route('admin.reservation.index') }}" class="btn btn-primary">
                 <span class="text">{{ __('Go Back') }}</span>

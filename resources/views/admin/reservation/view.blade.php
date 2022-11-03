@@ -10,14 +10,14 @@
                     {{ __('List of Reservation') }}
                 </h5>
                 <div class="ml-auto">
-                    {{-- @can('room_create') --}}
-                    <a href="{{ route('admin.reservation.create') }}" class="btn btn-primary">
+                    @can('booking-create')
+                    <a href="{{ route('admin.reservation.create') }}" class="btn btn-primary btn-sm">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
                         <span class="text">{{ __('Reservation') }}</span>
                     </a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
@@ -46,19 +46,25 @@
                                 <td>{{ $reservation->arrival_date}}</td>
                                 <td>{{ $reservation->departure_date}}</td>
                                 <td style="white-space: nowrap;">
-                                    <a href="{{ route('admin.reservation.show', $reservation->id) }}" class="btn btn-dark btn-circle">
+                                    @can('booking-show')
+                                    <a href="{{ route('admin.reservation.show', $reservation->id) }}" class="btn btn-dark btn-circle btn-sm">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('admin.reservation.edit', $reservation->id) }}" class="btn btn-success btn-circle">
+                                    @endcan
+                                    @can('booking-edit')
+                                    <a href="{{ route('admin.reservation.edit', $reservation->id) }}" class="btn btn-success btn-circle btn-sm">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
+                                    @endcan
+                                    @can('booking-delete')
                                     <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.reservation.destroy', $reservation->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger btn-circle">
+                                        <button class="btn btn-danger btn-circle btn-sm">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                             {{-- @empty

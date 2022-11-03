@@ -2,28 +2,36 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Permission;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Request;
-use Symfony\Component\HttpFoundation\Response;
-use App\Http\Requests\Admin\StorePermissionRequest;
-use App\Http\Requests\Admin\UpdatePermissionRequest;
+use DB;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+    /**
+     * create a new instance of the class
+     *
+     * @return void
+     */
+    function __construct()
+    {
+         $this->middleware('permission:permission-list|permission-create|permission-edit|permission-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:permission-create', ['only' => ['create','store']]);
+         $this->middleware('permission:permission-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:permission-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {      
-        //abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-    
-        $permissions = Permission::get();
-
-        return view('admin.permissions.index', compact('permissions'));
+    public function index(Request $request)
+    {
+        //$data = Permission::orderBy('id','DESC')->paginate(5);
+        $data = Permission::all();
+        return view('admin.permissions.index', compact('data'));
     }
 
     /**
@@ -33,8 +41,6 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //abort_if(Gate::denies('permission_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         return view('admin.permissions.create');
     }
 
@@ -44,16 +50,30 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePermissionRequest $request)
+    public function store(Request $request)
     {
-    //    abort_if(Gate::denies('permission_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        Permission::create($request->validated());
-
-        return redirect()->route('admin.permissions.index')->with([
-            'message' => 'successfully created !',
-            'alert-type' => 'success'
+        $this->validate($request, [
+            'name' => 'required|unique:permissions,name',
         ]);
+    
+        Permission::create(['name' => $request->input('name')]);
+        return redirect()->route('admin.permissions.index')->with([
+                'message' => 'Successfully Created !',
+                'alert-type' => 'success'
+            ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $permission = Permission::find($id);
+    
+        return view('admin.permissions.show', compact('permission'));
     }
 
     /**
@@ -62,10 +82,10 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Permission $permission)
+    public function edit($id)
     {
-      //  abort_if(Gate::denies('permission_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        $permission = Permission::find($id);
+    
         return view('admin.permissions.edit', compact('permission'));
     }
 
@@ -76,16 +96,20 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePermissionRequest $request,Permission $permission)
+    public function update(Request $request, $id)
     {
-        //abort_if(Gate::denies('permission_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $permission->update($request->validated());
-
-        return redirect()->route('admin.permissions.index')->with([
-            'message' => 'successfully updated !',
-            'alert-type' => 'info'
+        $this->validate($request, [
+            'name' => 'required'
         ]);
+    
+        $permission = Permission::find($id);
+        $permission->name = $request->input('name');
+        $permission->save();
+        
+        return redirect()->route('admin.permissions.index')->with([
+                'message' => 'Successfully Updated !',
+                'alert-type' => 'info'
+            ]);
     }
 
     /**
@@ -94,28 +118,18 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy($id)
     {
-        //abort_if(Gate::denies('permission_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
-        $permission->delete();
-
+        Permission::find($id)->delete();
         return redirect()->route('admin.permissions.index')->with([
-            'message' => 'successfully created !',
-            'alert-type' => 'danger'
-        ]);
+                'message' => 'Successfully Deleted !',
+                'alert-type' => 'danger'
+            ]);
     }
 
-     /**
-     * Delete all selected Permission at once.
-     *
-     * @param Request $request
-     */
     public function massDestroy(Request $request)
     {
-        //abort_if(Gate::denies('permission_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         Permission::whereIn('id', request('ids'))->delete();
-
         return response()->noContent();
     }
 }

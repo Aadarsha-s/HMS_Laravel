@@ -10,14 +10,14 @@
                     {{ __('Permission') }}
                 </h5>
                 <div class="ml-auto">
-                    {{-- @can('permission_create') --}}
-                    <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary">
+                    @can('permission-create')
+                    <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary btn-sm">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
                         <span class="text">{{ __('New permission') }}</span>
                     </a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
@@ -25,41 +25,44 @@
                     <table class="table table-bordered table-striped table-hover datatable datatable-Permission" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th width="10">
-
-                                </th>
+                                <th></th>
                                 <th>No</th>
                                 <th>Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($permissions as $permission)
-                            <tr data-entry-id="{{ $permission->id }}">
-                                <td>
-                                </td>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $permission->title }}</td>
-                                <td>
-                                    <a href="{{ route('admin.permissions.edit', $permission->id) }}" class="btn btn-success btn-circle">
-                                        <i class="fa fa-pencil-alt"></i>
-                                    </a>
-                                    <form onclick="return confirm('are you sure ? ')" class="d-inline" action="{{ route('admin.permissions.destroy', $permission->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger btn-circle">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @empty
+                            @foreach ($data as $key => $permission)
                             <tr>
-                                <td colspan="7" class="text-center">{{ __('Data Empty') }}</td>
+                                <td></td>
+                                <td>{{ $permission->id }}</td>
+                                <td>{{ $permission->name }}</td>
+                                <td>
+                                    {{-- <a class="btn btn-success" href="{{ route('admin.permissions.show',$permission->id) }}">Show</a> --}}
+                                    @can('role-edit')
+                                        <a class="btn btn-success btn-circle btn-sm" href="{{ route('admin.permissions.edit',$permission->id) }}">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </a>
+                                    @endcan
+                                    @can('role-delete')
+                                        {{-- {!! Form::open(['method' => 'DELETE','route' => ['admin.permissions.destroy', $permission->id],'style'=>'display:inline']) !!}
+                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-circle']) !!}
+                                        <i class="fa fa-pencil-alt"></i>
+                                        {!! Form::close() !!} --}}
+                                        <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.permissions.destroy', $permission->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-circle btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                </td>
                             </tr>
-                            @endforelse
+                        @endforeach
                         </tbody>
                     </table>
+                    {{-- {{ $data->appends($_GET)->links() }} --}}
                 </div>
             </div>
         </div>
@@ -85,7 +88,7 @@
         alert('zero selected')
         return
       }
-      if (confirm('are you sure ?')) {
+      if (confirm('Are you sure ?')) {
         $.ajax({
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           method: 'POST',
@@ -98,7 +101,7 @@
   dtButtons.push(deleteButton)
   $.extend(true, $.fn.dataTable.defaults, {
     order: [[ 1, 'asc' ]],
-    pageLength: 50,
+    pageLength: 10,
   });
   $('.datatable-Permission:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

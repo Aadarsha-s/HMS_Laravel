@@ -13,14 +13,14 @@
                     {{ __('List of Room') }}
                 </h5>
                 <div class="ml-auto">
-                    {{-- @can('room_create') --}}
-                    <a href="{{ route('admin.rooms.create') }}" class="btn btn-primary">
+                    @can('room1-create')
+                    <a href="{{ route('admin.rooms.create') }}" class="btn btn-primary btn-sm">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
                         <span class="text">{{ __('New room') }}</span>
                     </a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
@@ -51,16 +51,21 @@
                                     {{-- <a href="{{ route('admin.rooms.show', $room->id) }}" class="btn btn-info">
                                         <i class="fa fa-eye"></i>
                                     </a> --}}
-                                    <a href="{{ route('admin.rooms.edit', $room->id) }}" class="btn btn-success btn-circle">
+                                    @can('room1-edit')
+                                    <a href="{{ route('admin.rooms.edit', $room->id) }}" class="btn btn-success btn-circle btn-sm">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
+                                    @endcan
+
+                                    @can('room1-delete')
                                     <form onclick="return confirm('Are you sure ? ')" class="d-inline" action="{{ route('admin.rooms.destroy', $room->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger btn-circle">
+                                        <button class="btn btn-danger btn-circle btn-sm">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                             {{-- @empty

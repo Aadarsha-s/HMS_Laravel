@@ -17,27 +17,27 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check())
-        {
-            if(Auth::user()->role_as == '1')
-            {
-                return $next($request);
-            }
-            else
-            {
-                return redirect('user/home')->with('status','Access Denied! As you are not admin');
-            }
-        }
-        else{
-            return redirect('/login')->with('status','Please Login first..');
-        }
-        // if (!auth()->check()) {
-        //     return redirect('/');
+        // if(Auth::check())
+        // {
+        //     if(Auth::user()->role_as == '1')
+        //     {
+        //         return $next($request);
+        //     }
+        //     else
+        //     {
+        //         return redirect('user/home')->with('status','Access Denied! As you are not admin');
+        //     }
         // }
+        // else{
+        //     return redirect('/login')->with('status','Please Login first..');
+        // }
+        if (!auth()->check()) {
+            return redirect('/');
+        }
         // if (auth()->user()->roles()->where('title', 'user')->count() > 0) {
         //     return redirect('/');
         // }
 
-        // return $next($request);
+        return $next($request);
     }
 }

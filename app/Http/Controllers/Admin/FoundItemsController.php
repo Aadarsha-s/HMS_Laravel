@@ -13,7 +13,15 @@ use Symfony\Component\HttpFoundation\Response;
 class FoundItemsController extends Controller
 {
     //
-    
+    function __construct()
+    {
+         $this->middleware('permission:founditems-list|founditems-create|founditems-edit|founditems-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:founditems-create', ['only' => ['create','store']]);
+         $this->middleware('permission:founditems-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:founditems-massDestroy', ['only' => ['massDestroy']]);
+         $this->middleware('permission:founditems-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $founditems = Founditem::all();

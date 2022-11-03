@@ -10,8 +10,17 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\Admin\RoomRequest;
 use Symfony\Component\HttpFoundation\Response;
 
+
+
 class RoomController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:room1-list|room1-create|room1-edit|room1-delete', ['only' => ['index', 'show']]);
+         $this->middleware('permission:room1-create', ['only' => ['create', 'store']]);
+         $this->middleware('permission:room1-edit', ['only' => ['edit', 'update']]);
+         $this->middleware('permission:room1-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $rooms = Room::all();

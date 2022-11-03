@@ -7,36 +7,29 @@
     <!-- Content Row -->
         <div class="card shadow">
             <div class="card-header py-3 d-flex">
-                <h1 class="h3 mb-0 text-gray-800">{{ __('Add Roles') }}</h1>
+                <h5 class="font-weight-bold text-primary">{{ __('Add Roles') }}</h5>
                     <div class="ml-auto">
-                        <a href="{{ route('admin.roles.index') }}" class="btn btn-primary">{{ __('Go Back') }}</a>
+                        <a href="{{ route('admin.roles.index') }}" class="btn btn-primary btn-sm">{{ __('Go Back') }}</a>
                     </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.roles.store') }}" method="POST">
-                    @csrf
+                {!! Form::open(array('route' => 'admin.roles.store','method'=>'POST')) !!}
                     <div class="form-group col-md-6">
-                        <label for="title">{{ __('Name') }}</label>
-                        <input type="text" class="form-control" id="title" placeholder="{{ __('') }}" name="title" value="{{ old('title') }}" />
+                        <label for="name">Name</label>
+                        {!! Form::text('name', null, array('placeholder' => '','class' => 'form-control')) !!}
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="permissions">{{ __('Permission') }}</label> <br>
-                        
-                            @foreach($permissions as $id => $permissions)
-                                <input type="checkbox" class="form-group" name="permissions[]" id="permissions" value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || isset($role) && $role->permissions->contains($id)) ? 'selected' : '' }}>
-                                {{ $permissions }} <br>
-                            @endforeach
-                        
+                        <label for="permission[]">Permission</label>
+                        <br/>
+                        @foreach($permission as $value)
+                            <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
+                            {{ $value->name }}</label>
+                        <br/>
+                        @endforeach
                     </div>
-                    <div class="form-row" style="margin-left: 7px">
-                        <div class="form-group col-md-1">
-                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
-                        </div>
-                        <div class="form-group col-md-1">
-                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
-                        </div>
-                    </div>
-                </form>
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 12px">Save</button>
+                    <button type="reset" class="btn btn-primary btn-sm" style="">Cancel</button>
+                {!! Form::close() !!}
             </div>
         </div>
     

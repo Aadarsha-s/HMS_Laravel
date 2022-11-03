@@ -16,9 +16,9 @@
 <!-- Content Row -->
         <div class="card shadow">
             <div class="card-header py-3 d-flex">
-            <h1 class="h3 mb-0 text-gray-800">{{ __('Add Room') }}</h1>
+            <h5 class="font-weight-bold text-primary">{{ __('Add Room') }}</h5>
                 <div class="ml-auto">
-                    <a href="{{ route('admin.rooms.index') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.rooms.index') }}" class="btn btn-primary btn-sm">
                         <span class="text">{{ __('Go Back') }}</span>
                     </a>
                 </div>
@@ -75,14 +75,8 @@
                             <option value="Out of Order">Out of Order</option>
                           </select>
                     </div>
-                    <div class="form-row" style="margin-left: 7px">
-                        <div class="form-group col-md-1">
-                            <button type="submit" class="btn btn-primary btn-block ">{{ __('Save') }}</button>
-                        </div>
-                        <div class="form-group col-md-1">
-                            <button type="reset" class="btn btn-primary btn-block ">{{ __('Cancel') }}</button>
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 12px">Save</button>
+                    <button type="reset" class="btn btn-primary btn-sm" style="">Cancel</button>
                 </form>
             </div>
         </div>

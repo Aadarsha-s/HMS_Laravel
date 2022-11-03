@@ -11,6 +11,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LostComplainController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:lostcomplain-list|lostcomplain-create|lostcomplain-edit|lostcomplain-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:lostcomplain-create', ['only' => ['create','store']]);
+         $this->middleware('permission:lostcomplain-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:lostcomplain-massDestroy', ['only' => ['massDestroy']]);
+         $this->middleware('permission:lostcomplain-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $lostcomplains = Lostcomplain::all();
